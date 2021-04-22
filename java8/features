@@ -1,0 +1,187 @@
+Lambda is used to give implementation whenever required.
+To avoid creating class implements functional interface and then given implementation of abstract method.
+
+	       List<Integer> ls = new ArrayList<>();
+	       ls.add(10);
+	       ls.add(8);
+	       ls.add(80);
+	       ls.add(9);
+	       ls.add(2);
+	       ls.add(100);
+	       System.out.println(ls); // [10, 8, 80, 9, 2, 100]
+	       Collections.sort(ls); // default sorting is ascending order
+	       System.out.println(ls); // [2, 8, 9, 10, 80, 100]
+     
+Comparator<Integer> mySorting01 = (o1,o2)->{ // Comparator<Integer> thus not requied to give type for input params 01, 02.
+
+	    	   int resultComparison = 0;
+	   		
+	   		if(o1>o2) {
+	   			resultComparison = -1;
+	   		}else if(o1<o2) {
+	   			resultComparison = 1;
+	   		}else {
+	   			resultComparison = 0;
+	   		}
+	   		
+	   		return resultComparison;
+	       }; // lambda with compare method implementation.	   
+	       Collections.sort(ls,mySorting01); // Custom sorting in descending order
+	       System.out.println(ls); // [100, 80, 10, 9, 8, 2]
+
+class MySorting implements Comparator<Integer>{ // java.util.Comparator<T> is functional interface with only one abstract method int compare(T o1, T o2);
+
+	@Override
+	public int compare(Integer o1, Integer o2) {
+		int resultComparison = 0;
+		
+		if(o1>o2) {
+			resultComparison = -1;
+		}else if(o1<o2) {
+			resultComparison = 1;
+		}else {
+			resultComparison = 0;
+		}
+		
+		return resultComparison;
+	}
+	
+}
+
+
+
+When you use Streams API and write some computation ,  you are going to automatically use the Functional Interfaces.
+
+Sample Functions in Streams API:
+
+1) filter = Uses the Predicate function interface 
+=== java.util.function.Predicate<T>
+=== to check/validate condition, return boolean
+=== functional interface with only one abstract method boolean test(T t);
+       // T is input Type with return type boolean
+=== Instead of many validation methods for checking many conditions, better to use Predicate to reduce code.
+=== Example – To validate the condition of salary more than 6000. 
+int salary = 6000;
+Predicate<Integer> pr = s -> (s >= 3000);
+boolean test = pr.test(salary);
+System.out.println(test); // true
+========================================================================
+2) map = Uses the Function function interface
+=== java.util.function.Function<T,R> // T is input type , R is output type.
+=== Apply change to given input to given required output.
+=== functional interface with only one abstract method  R apply(T t);
+=== Instead of many concatenation/truncating/update methods, better to use Function to reduce code.
+=== Example
+int salaryFunction = 6000;
+Function<Integer, Boolean> fn = sfn -> sfn>=3000; 
+Boolean apply = fn.apply(salaryFunction);
+System.out.println(apply); // true
+	       
+Function<String, String> fn01 = strInput -> "length of " + strInput + " is "+strInput.length();
+String apply2 = fn01.apply("Demo");
+System.out.println(apply2); // length of Demo is 4
+
+Function<String, String> fn01 = strInput -> strInput + "Update";
+String apply2 = fn01.apply("Demo");
+System.out.println(apply2); // DemoUpdate
+       
+Function<String, Integer> fn02 = strInput -> strInput.length();
+Integer apply3 = fn02.apply("Demo");
+System.out.println(apply3); // 4
+
+
+3) forEach ->  Uses the Consumer function interface   --> BiConsumer
+=== java.util.function.Consumer<T> // T is input type , no output type.
+=== Consume (take) input without supplying (giving) output.
+=== functional interface with only one abstract method  void accept(T t);
+=== any time a function not to generate a result and consume any data . Ie, consume input to do CRUD operation without output
+=== Example
+Consumer<String> cons = (String strValue) -> {
+	    	   System.out.println(strValue.length()); // 4
+	    	   System.out.println(strValue+"consume"); // Democonsume
+	    	   };
+cons.accept("Demo");
+
+
+4) Uses the Supplier function interface  
+ 
+=== java.util.function.Supplier <T> // T is output type , no input type.
+=== Supply(give) output without consuming(taking) input.
+=== functional interface with only one abstract method  T get();
+=== any time a function needs to generate a result without any data passed into it as param.
+=== Example
+Supplier<String> supp = () -> "Hello Supplier";
+	    String getValue = supp.get();
+	    System.out.println(getValue); //Hello Supplier
+
+Supplier<String> supp = () -> {
+	    	String suppValue = "Hello Supplier";
+	    	suppValue = suppValue+" Again";
+	    	return suppValue;
+	    };
+String getValue = supp.get();
+System.out.println(getValue); //Hello Supplier Again
+
+
+Java’s Consumer and Supplier interfaces are functional compliments to one another. If a function needs to both pass data into it and return data as a response, then use the Function interface, because it combines the capabilities of both the Consumer and Supplier interface.
+No lambda. Use of method reference, constructor reference with double colon operator :: when definition is already available.
+
+	    OperatorCheck opObj = () -> System.out.println("With lambda");
+	    opObj.operMethod(); //With lambda
+	    
+	    //operMethod having same argument as addMethod, addMethod01, addMethod02.
+	    //Thus instead of defining operMethod with lambda, we can use addMethod, addMethod01, addMethod02.
+	   
+	    DemoApplication demoObj = new DemoApplication();
+	    //OperatorCheck obj = demoObj :: addMethod;// COmpile time ERROR
+	    OperatorCheck obj = DemoApplication :: addMethod;
+	    obj.operMethod();// static addMethod body
+	    
+	    obj = demoObj :: addMethod01;
+	    obj.operMethod(); //instance addMethod01 body
+	    
+	    obj = demoObj :: addMethod02;
+	    obj.operMethod(); //instance return addMethod02 body
+	    
+	    obj = DemoApplication :: new; // Constructor reference
+	    obj.operMethod(); //Constructor body
+	    
+	    
+	    OperatorCheck01 opeObj = DemoApplication :: addMethodOper; // with arguments then also use method name only
+	    opeObj.operMethod("Demo object");
+	    
+	}
+	
+	public DemoApplication() {
+		System.out.println("Constructor body");
+	}
+
+	public static void addMethod() {
+		System.out.println("static addMethod body");
+	}
+	
+	public void addMethod01() {
+		System.out.println("instance addMethod01 body");
+	}
+	
+	public int addMethod02() {
+		System.out.println("instance return addMethod02 body");
+		return 10;
+	}
+	
+	public static void addMethodOper(String x) {
+		System.out.println(x+"static addMethodOper body");
+	}
+
+
+
+
+@FunctionalInterface
+interface OperatorCheck{
+	public void operMethod();
+}
+
+@FunctionalInterface
+interface OperatorCheck01{
+	public void operMethod(String str);
+}
