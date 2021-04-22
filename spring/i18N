@@ -1,0 +1,61 @@
+=====================================i18N===================================================================
+
+@SpringBootApplication
+public class SpringbootBuildingblocksApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringbootBuildingblocksApplication.class, args);
+	}
+	
+	@Bean
+	public LocaleResolver localeResolver() { // To read value of the key "accept-language" in header of the HTTP request.
+		AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
+		localeResolver.setDefaultLocale(Locale.US); // Set default local as US
+		return localeResolver;
+	}
+	
+	@Bean
+	public ResourceBundleMessageSource messageSource() { // To find the file from which we get the value of key searched.
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("i18N/messages"); // Under main/resources/i18N create two files messages.properties, messages_fr.properties
+		return messageSource;
+	}
+	
+}
+
+===========================================================================
+messages.properties
+label.hello=Hello World
+l2=Hello {0}, how are you?
+
+messages_fr.properties
+label.hello=Hello World - fr
+l2=Hello {0}, how are you? - fr
+
+==================================================================================
+
+@RestController
+public class HelloWorldController {
+	@Autowired
+	private ResourceBundleMessageSource messageSource;
+	
+	@GetMapping("/hello-int2")
+	public String getMessagesInI18NFormat2() {
+		//return messageSource.getMessage("l2", new Object[] {"Paul Smith"}, Locale.US); //Hello Paul Smith, how are you?
+		return messageSource.getMessage("label.hello", null, LocaleContextHolder.getLocale()); // Hello World
+		
+	}
+}
+
+=======================================================
+Output
+
+In postman, along with url end with /hello-int2
+
+1) If Accept-Language = fr then output is 
+	//Hello Paul Smith, how are you? - fr
+	Hello World - fr
+	
+2) If Accept-Language = en or US then output is 
+	//Hello Paul Smith, how are you?
+	Hello World
