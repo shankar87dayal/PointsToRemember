@@ -48,7 +48,7 @@ class MySorting implements Comparator<Integer>{ // java.util.Comparator<T> is fu
 	
 }
 
-
+=======================================================================================================================================
 
 When you use Streams API and write some computation ,  you are going to automatically use the Functional Interfaces.
 
