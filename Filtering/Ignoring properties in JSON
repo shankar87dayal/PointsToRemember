@@ -1,5 +1,0 @@
-==============================================Filtering/ Ignoring properties in JSON serialization and deserialization.=========================================================================
-
-@JsonIgnore used at method (setter, getter) or field - To ignore that property - @JsonIgnore
-@JsonIgnoreProperties used at at the class level - To ignore one or more properties. - @JsonIgnoreProperties(value = {"id","firstName"})
-@JsonIgnoreType used at the class level - To ignores all properties of class. - @JsonIgnoreType
