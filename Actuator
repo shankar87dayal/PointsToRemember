@@ -1,0 +1,21 @@
+====================================================Actuator====================================================
+The spring-boot-actuator module provides all of Spring Boot’s production-ready features.
+
+** health tell about application up or not,database up or not,disk space detail and many more.
+
+1) Add dependency spring-boot-starter-actuator.
+2) By default, all endpoints except for shutdown are enabled.
+3) Enable endpoint as required, but instead of this use 4.
+management.endpoint.info.enabled=true
+
+*** Disabled endpoints are removed entirely from the application context. If you want to change only the technologies over which an endpoint is exposed, use the include and exclude properties instead.
+ 
+4) If want to enable endpoint info, health on web instead of JMX
+management.endpoints.web.exposure.include=info, health
+To include or exclude over web
+management.endpoints.web.exposure.include=* // All endpoint enabled
+management.endpoints.web.exposure.exclude=info
+
+To include or exclude over jmx 
+management.endpoints.jmx.exposure.include=*
+management.endpoints.jmx.exposure.exclude=health
