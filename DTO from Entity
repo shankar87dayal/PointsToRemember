@@ -1,0 +1,81 @@
+===================================================Entity to DTO and vice versa======================================================================================
+To display only few fields of dto instead of entire of entity as response.
+
+In ModelMapper dto fields name must be identical to that of entity. If different name required in dto then use MapStruct
+
+Firstly, add modelmapper maven dependency in pom.xml
+
+@Entity
+@Table(name = "user")
+public class User{
+
+	@Id
+	@GeneratedValue
+	private Long userid;
+	
+	private String username;
+	private String firstname;
+	private List<Order> orders;
+	private String lastname;
+	private String email;
+	private String role;
+	private String ssn;
+	
+	//getter & setter, tostring, constructor - default & parameterized both.
+}
+
+
+public class UserMmDto {
+	
+	private Long userid;
+	private String username;
+	private String firstname;
+	private List<Order> orders;
+	
+	//getter & setter, tostring, constructor - default & parameterized both.
+	
+}
+
+
+
+@Configuration
+public class AppConfig {// Config class for creating bean of ModelMapper
+	
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
+
+}
+
+
+
+@RestController
+@RequestMapping("/modelmapper/users")
+public class UserModelMapperController {
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private ModelMapper modelMapper;
+
+	@GetMapping("/{id}")
+	public UserMmDto getUserById(@PathVariable("id") @Min(1) Long id) throws UserNotFoundException {
+
+				 Optional<User> userOptional = userService.getUserById(id);
+				
+				if(!userOptional.isPresent()) {
+					throw new UserNotFoundException("user not found");
+				}
+				
+				User user = userOptional.get();
+			
+			UserMmDto userMmDto = modelMapper.map(user, UserMmDto.class); // To convert from source "User" to destination "UserMmDto"
+			return userMmDto; // This will return entire fields of UserMmDto dto -- 4 fields
+			
+			//return user; // This will return entire fields of User entity -- 8 fields
+	
+	}
+}
+
