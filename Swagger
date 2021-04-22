@@ -1,0 +1,76 @@
+===============================API documentation - Swagger/Open API===========================
+
+1) Add maven dependency for springfox-swagger2, springfox-swagger-ui
+2) Define SwaggerConfig
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+	
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.select()
+				.apis(RequestHandlerSelectors.any()) //All controllers and entity from all packages.
+				//.apis(RequestHandlerSelectors.basePackage("com.sc.cib.api")) // 
+				.paths(PathSelectors.any()) // All methods of every controller should display
+				//.paths(PathSelectors.ant("/users/**")) // All method of controller start with /users
+				.build();
+	}
+	
+
+}
+
+
+http://localhost:8090/swagger-ui.html
+
+====To add detail in model/Entity with below swagger core annotation for giving more clear detail to customer===
+Add dependency for springfox-bean-validators
+
+@ApiModel - At class level.
+@ApiModelProperty - At method level
+
+
+
+
+@ApiModel(description = "This model is to create a user") // To add field description in model
+@Entity
+@Table(name = "user")
+//@JsonIgnoreProperties({"firstname", "lastname"})  -- Static Filtering @JsonIgnore
+//@JsonFilter(value = "userFilter")  -- Used for MappingJacksonValue filtering section
+public class User extends ResourceSupport {
+
+	@ApiModelProperty(notes = " Auto generated unique id", required = true, position = 1) // at position 1, this field with red star as required = true
+	@Id
+	@GeneratedValue
+	private Long userid;
+	
+	@ApiModelProperty(notes = "username should be in format flname", example = "kreddy", required = false, position = 2) // at position 2, this field
+	private String username;
+	
+	
+	
+======================================================Enhance swagger page with annotation===========================================================================
+
+
+
+*** If we have 8 fields in entity and @ApiModelProperty with position used with only 2 fields then firstly remaining 6 fields will be arranged alphabetically
+and then userid, username.
+Thus if want correct ordering then use @ApiModelProperty with position with all fields.
+
+
+
+
+===To add detail in controller with below swagger core annotation===
+
+@Api at class level.
+@ApiOperation at method level.
+@ApiParam at parameter of method
+
+
+@Api(tags = "User Management RESTful Services", value = "UserController", description = "Controller for User Management Service")
+
+@ApiOperation(value = "Creates a new user")
+@PostMapping
+public ResponseEntity<Void> createUser(@ApiParam("User information for a new user to be created.") @Valid @RequestBody User user)
+
