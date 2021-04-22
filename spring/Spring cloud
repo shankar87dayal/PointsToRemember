@@ -9,10 +9,10 @@ open source Components/Projects in Spring cloud which are not available in sprin
 4) Easy Integration - Feign client
 5) Cross Cutting Concerns - Spring Cloud Gateway  (Best), Zuul  as Proxy/API gateway.
    Cross Cutting Concerns like 
-                1) Security (Authentication, Authorization, Encryption/Decryption),
-                2) Tracing (Track from incoming request till response via Logging), 
-                3) Service aggregation (Interaction of one micro service to other), 
-                4) Rate limit (To find the amount of resorce used in cloud environment), 
+                a) Security (Authentication, Authorization, Encryption/Decryption),
+                b) Tracing (Track from incoming request till response via Logging), 
+                c) Service aggregation (Interaction of one micro service to other), 
+                d) Rate limit (To find the amount of resorce used in cloud environment), 
                 etc.
    API Gateway will automatically do the server side load balancing.
    API Gateway allows us to implement cross cutting concerns.
@@ -22,6 +22,14 @@ open source Components/Projects in Spring cloud which are not available in sprin
    To find the reason of failure and place where it failed
 
 7) Centralized configuration
-    Create config server -> spring-cloud-config-server
-    Create config repository -> properties file in GitHub
-    Create config client -> spring-cloud-config-client
+    a)Create config server -> spring-cloud-config-server
+    b)Create config repository -> properties file in GitHub
+    		//spring.cloud.config.server.git.uri=file:///d:/config-properties   // For local file
+    		spring.cloud.config.server.git.uri=https://github.com/abcd/springboot.git
+		spring.cloud.config.server.git.uri.username=test
+		spring.cloud.config.server.git.uri.password=test
+	
+	To access "config-client.properties", use http://localhost:8888/config-client/default
+	To access "config-client-development.properties", use http://localhost:8888/config-client/development
+	
+    c)Create config client -> spring-cloud-config-client
