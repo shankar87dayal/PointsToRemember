@@ -1,0 +1,21 @@
+==================================================Testing types===============================================================
+Environment - Testing type
+
+Coding - Unit Test
+Design - Integration Test
+Requirement - System Test
+Client Need - UAT (User Acceptance Test) / UVT (User Verification Test)
+
+==================Types of Environments==================
+
+Local dev, Scrum dev in AWS, SIT 3(Integration testing) via VX pipeline in Korean , UAT environment, PROD.
+
+commit, PR with approver , Approve, PR Build can auto start/manually via jenkin, merged to develop by approver.
+
+1) PR Build can auto start/manually via jenkin will generate jar. Will not use this jar for deployment. Only used for merging.
+
+2) Build job of develop branch. This jar is for deployment.
+
+
+Team - Kia, reanualt (UI), Hyundia (Oltp Korean) - Back Office.
+Core SCB team - UX
