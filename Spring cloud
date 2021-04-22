@@ -1,0 +1,27 @@
+open source Components/Projects in Spring cloud which are not available in spring boot:-
+
+1) Service Registration & Discovery - Netflix Eureka server - To registered all microservice.
+2) Load Balancing - Spring Cloud Load Balancer (Best), Ribbon as client side load balancer.
+		Spring Cloud Load Balancer is used with Feign client.
+
+
+3) Fault Tolerance - Resilence4j (Best), Hystrix (deprecated) - If some depended microservice is down/not responding, retry (by default 3 times) it number of times and if connected even after that then to handle the error gracefully 
+4) Easy Integration - Feign client
+5) Cross Cutting Concerns - Spring Cloud Gateway  (Best), Zuul  as Proxy/API gateway.
+   Cross Cutting Concerns like 
+                1) Security (Authentication, Authorization, Encryption/Decryption),
+                2) Tracing (Track from incoming request till response via Logging), 
+                3) Service aggregation (Interaction of one micro service to other), 
+                4) Rate limit (To find the amount of resorce used in cloud environment), 
+                etc.
+   API Gateway will automatically do the server side load balancing.
+   API Gateway allows us to implement cross cutting concerns.
+
+6) Distributed Tracing - Sleuth and Zipkin - 
+   To track request by adding trace id
+   To find the reason of failure and place where it failed
+
+7) Centralized configuration
+    Create config server -> spring-cloud-config-server
+    Create config repository -> properties file in GitHub
+    Create config client -> spring-cloud-config-client
