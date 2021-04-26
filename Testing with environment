@@ -7,8 +7,9 @@ Requirement - System Test
 Client Need - UAT (User Acceptance Test) / UVT (User Verification Test)
 
 ==================Types of Environments==================
+Child branch of develop branch can be of type - Bugfix, Hotfix (Blocker Bugfix), Feature (New functionality), Release (Minimum Viable Product), Custom.
 
-Local dev, Scrum dev in AWS, SIT 3(Integration testing) via VX pipeline in Korean , UAT environment, PROD.
+(child branch of develop branch) Local machine of developer, (child branch of develop branch) dev in AWS, (develop branch) SIT 3(Integration testing) via VX pipeline in Korean , (master branch) UAT environment, (master branch) PROD.
 
 commit, PR with approver , Approve, PR Build can auto start/manually via jenkin, merged to develop by approver.
 
