@@ -1,0 +1,19 @@
+
+Synchronous - Wait for response and then continue code execution further. Ex - Single threaded environment.
+Asynchronous - Don't wait for response and continue code execution further. Ex - Multi threaded environment.
+
+============================================================================================================================
+
+HTTP is syncronous protocol.
+REST Web service is a HTTP call and depending on the behaviour of client (caller), it can be Synchronous or Asynchronous.
+
+
+
+============================================================================================================================
+
+Assume, in controller method we are connecting, reading data and updating data.
+
+By default, client is doing Synchronous call. Thus, here REST Web service is Synchronous.
+
+To make Asynchronous call by client, use @Async on method and @EnableAsync on configuration java class.
+For detail about Asynchronous call, refer this https://howtodoinjava.com/spring-boot2/rest/enableasync-async-controller/
