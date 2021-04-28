@@ -1,5 +1,5 @@
 *****PR with single commit:
-https://github.com/shankar87dayal/PointsToRemember/pulls/38/commits/59f57dab777c752c25027ff9209865ca1400b3b1
+https://github.com/shankar87dayal/PointsToRemember/pulls/38/commits/59f27ff9209865ca1400b3b1
 
 1) Login with SCB credential
 https://jenkins.com/
@@ -23,7 +23,7 @@ https://jenkins.com/jenkins/view/all/
 8) Give value of below key, 
 *** please remove extra space first because there is default extra space
 PULL_REQUEST_ID = 38 (same as PR number)
-PULL_REQUEST_SOURCE_SHA = 59f57dab777c752c25027ff9209865ca1400b3b1
+PULL_REQUEST_SOURCE_SHA = 59f27ff9209865ca1400b3b1
 
 ****If PR having many commits then take last commit id.
 
