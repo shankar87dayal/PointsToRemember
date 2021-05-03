@@ -1,4 +1,4 @@
-open source Components/Projects in Spring cloud which are not available in spring boot:-
+Open source Components/Projects in Spring cloud which are not available in spring boot:- Non functional requirement of microservice
 
 1) Service Registration & Discovery - Netflix Eureka server - To registered all microservice.
 2) Load Balancing - Spring Cloud Load Balancer (Best), Ribbon as client side load balancer.
@@ -8,7 +8,7 @@ open source Components/Projects in Spring cloud which are not available in sprin
 3) Fault Tolerance - Resilence4j (Best), Hystrix (deprecated) - If some depended microservice is down/not responding, retry (by default 3 times) it number of times and if connected even after that then to handle the error gracefully 
 4) Easy Integration - Feign client
 5) Cross Cutting Concerns - Spring Cloud Gateway  (Best), Zuul  as Proxy/API gateway.
-   Cross Cutting Concerns like 
+   Cross Cutting Concerns are common requirement like 
                 a) Security (Authentication, Authorization, Encryption/Decryption),
                 b) Tracing (Track from incoming request till response via Logging), 
                 c) Service aggregation (Interaction of one micro service to other), 
