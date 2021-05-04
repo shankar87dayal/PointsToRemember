@@ -30,7 +30,7 @@ eureka.client.fetch-registry=false #To disable fetch from the registry
 
 3) Properties defined in application.properties
 server.port=8081
-spring.application.name=coupon-service # In Eureka server, by this name this microservice will get registered.
+spring.application.name=coupon-service # In Eureka server, by this name this microservice "coupon service" will get registered.
 eureka.client.service-url.defaultZone=http://localhost:8761/eureka/  #Url of Eureka server project.
 eureka.client.register-with-eureka=true #To registered this micro-service on eureka server
 eureka.client.fetch-registry=true #To enable fetch from the registry
