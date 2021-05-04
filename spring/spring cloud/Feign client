@@ -1,0 +1,104 @@
+For Easy Integration use Feign client
+
+OpenFeign, originally known as Feign and sponsored by Netflix, is designed to allow developers to use a declarative way to build HTTP clients by means of creating annotated interfaces without writing any boilerplate code. 
+Spring Cloud OpenFeign uses Spring Cloud Load Balancer or Ribbon to provide client-side load balancing 
+And also to integrates nicely with other cloud services — such as Eureka for service discovery and Hystrix for fault tolerance. 
+These are all provided out of the box without writing any code.
+
+
+RestTemplate from the package "spring-boot-starter-web" provides a synchronous way of consuming Rest services, which means it will block the thread until it receives a response. 
+RestTemplate is deprecated since Spring 5 which means it’s not really that future proof.
+
+WebClient from package "spring-boot-starter-webflux" exists since Spring 5 and provides an asynchronous way of consuming Rest services, which means it operates in a non-blocking way. WebClient is in the reactive WebFlux library and thus it uses the reactive streams approach. 
+However, to really benefit from this, the entire throughput should be reactive end-to-end. 
+
+
+Best to use Feign client because of below points:-
+
+1.URLs are not hard coded.
+
+2.We don't have to write unit test cases for feign as there is no code to test however you have to write integration tests.
+
+3.We can use Eureka Client ID instead of the URL.
+
+4.Feign handled the actual code.
+
+5.Feign integrates with Ribbon and Eureka Automatically.
+
+6.Feign provides a very easy way to call RESTful services.
+
+7.Spring Cloud OpenFeign independently of RestTemplate and WebClient.
+
+============================================================================================================================================================
+============================================================================================================================================================
+
+Assume product-service internally use coupon-service. Then product-service is a client for coupon-service.
+
+Steps done on client, here product-service:
+
+**Eureka server is must.
+
+1) Add dependeny in pom.xml of product-service = spring-cloud-starter-openfeign
+
+2) Create interface for FeignClient
+
+@FeignClient("COUPON-SERVICE") // COUPON-SERVICE is name of registered microservice coupon-service in Eureka. Thus no hard coding of URL
+public interface CouponClient {
+	@GetMapping("/couponapi/coupons/{code}") // @RequestMapping(value = "/couponapi/coupons/{code}", method = RequestMethod.GET) in CouponRestController
+	Coupon getCoupon(@PathVariable("code") String code); 
+}
+
+Note:- Create duplicate Coupon from coupon-service (as Entity) to product-service (as POJO/DTO).
+
+public class Product {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String name;
+	private String description;
+	private BigDecimal price;
+	
+	@Transient
+	private String couponCode; //To hold code but not to store it in db.
+	//getter & setter
+}
+
+
+3) In ProductRestController, use getCoupon of CouponClient to reduce price before saving to db.
+
+	@RequestMapping(value = "/products", method = RequestMethod.POST)
+	public Product create(@RequestBody Product product) {
+		Coupon coupon = couponClient.getCoupon(product.getCouponCode());
+		product.setPrice(product.getPrice().subtract(coupon.getDiscount())); // Subtract price as per code and then set updated price.
+		return repo.save(product);
+	}
+
+4) Enable support for FeignClients
+@EnableFeignClients on main class ProductserviceApplication.java.
+
+5) Run Eureka server and then coupon-service (server/producer) an at last product-service (client/consumer).
+
+6) Test it now
+
+http://localhost:9090/productapi/products
+with below json in body
+
+{
+	"name":"IPhone",
+	"description":"Awesome",
+	"price":1000,
+	"couponCode":"SUPERSALE"
+}
+
+
+Assume with "SUPERSALE" in db means 10 then in response we will get below json
+
+
+{
+	"id":1,
+	"name":"IPhone",
+	"description":"Awesome",
+	"price":990.000,
+	"couponCode":"SUPERSALE"
+}
