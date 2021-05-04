@@ -1,5 +1,7 @@
 Service Registration & Discovery - Netflix Eureka server - To registered all micro-service.
 
+Eureka solve hard coding of urls of application to consume.
+
 
 1) Eureka server project - Separate project
 ===================================================
