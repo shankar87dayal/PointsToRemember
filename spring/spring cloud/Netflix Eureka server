@@ -1,0 +1,58 @@
+Service Registration & Discovery - Netflix Eureka server - To registered all micro-service.
+
+
+1) Eureka server project - Separate project
+===================================================
+
+1) @EnableEurekaServer on main class -- To make it Eureka Server.
+
+2) Eureka server Maven dependency in pom.xml - spring-cloud-starter-netflix-eureka-server as <dependency> under <dependencies>, spring-cloud-dependencies (under dependencyManagement)
+
+3) Properties defined in application.properties
+server.port=8761
+eureka.client.register-with-eureka=false #To not registered this on eureka server as this itself is eureka server.
+eureka.client.fetch-registry=false #To disable fetch from the registry
+
+4) Run as spring boot app
+
+5) Access https://localhost:8761 in browser
+
+
+
+2) Eureka client project - Each Micro-service
+====================================================
+
+1) @EnableEurekaClient on main class -- To make it Eureka Client.
+
+2) Eureka server Maven dependency in pom.xml - spring-cloud-starter-netflix-eureka-client as <dependency> under <dependencies> , spring-cloud-dependencies (under dependencyManagement)
+
+3) Properties defined in application.properties
+server.port=8081
+spring.application.name=coupon-service # In Eureka server, by this name this microservice will get registered.
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/  #Url of Eureka server project.
+eureka.client.register-with-eureka=true #To registered this micro-service on eureka server
+eureka.client.fetch-registry=true #To enable fetch from the registry
+
+
+4) Run as spring boot app
+
+5) In eureka server https://localhost:8761 already running, this micro-service will get registered with name "coupon-service".
+
+=========================In POM.xml======================================
+
+<properties>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+</properties>
+
+<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+</dependencyManagement>
