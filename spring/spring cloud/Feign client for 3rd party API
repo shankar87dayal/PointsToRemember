@@ -1,0 +1,21 @@
+Refer- https://www.baeldung.com/spring-cloud-openfeign
+
+Producer/Server URL - https://jsonplaceholder.typicode.com/posts/1
+
+All steps are same except update in step 2 as now 3rd party is not registered in Eureka server.
+
+Create interface for FeignClient
+
+@FeignClient(value = "jplaceholder", url = "https://jsonplaceholder.typicode.com/")
+public interface JSONPlaceHolderClient {
+
+    @RequestMapping(method = RequestMethod.GET, value = "/posts")
+    List<Post> getPosts();
+
+    @RequestMapping(method = RequestMethod.GET, value = "/posts/{postId}", produces = "application/json")
+    Post getPostById(@PathVariable("postId") Long postId);
+}
+
+
+NOTE:-
+The value argument passed in the @FeignClient annotation is a mandatory & arbitrary client name, while with the url argument we specify is the API base URL.
