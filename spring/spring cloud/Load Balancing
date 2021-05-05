@@ -1,0 +1,24 @@
+For Load Balancing, use  Spring Cloud Load Balancer (Best), Ribbon.
+Spring Cloud Load Balancer (Best), Ribbon as client side load balancer.
+Spring Cloud Load Balancer is used with Feign client.
+
+Steps:-
+==========
+
+1) In POM.xml of product-service (client) add spring-cloud-starter-loadbalancer as dependency.
+
+2)In product-service (client), we had FeignClient interface. From here "COUPON-SERVICE" registered in Eureka will be auto configured for load balancing.
+
+@FeignClient("COUPON-SERVICE") // COUPON-SERVICE is name of registered microservice coupon-service in Eureka. Thus no hard coding of URL
+public interface CouponClient {
+	@GetMapping("/couponapi/coupons/{code}") // @RequestMapping(value = "/couponapi/coupons/{code}", method = RequestMethod.GET) in CouponRestController
+	Coupon getCoupon(@PathVariable("code") String code); 
+}
+
+3) Test it.
+
+Run Eureka server, product-service and coupon-service(many times)
+
+If run coupon-service 3 times with 3 different ports one by one then in Eureka servere there will be 3 instance of coupon-service.
+If we have 3 request from product-service (client) in similar way as in Feign client steps, then now load balancing will get performed and each instance of coupon-service will get 1 request respectively.
+		
