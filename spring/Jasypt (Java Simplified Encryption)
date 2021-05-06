@@ -3,6 +3,7 @@ https://www.baeldung.com/spring-boot-jasypt
 
 Jasypt, Java Simplified Encryption provides encryption support for property sources in Spring Boot Applications.
 
+==============================================Steps============================================================================
 
 1) Add dependency jasypt-spring-boot-starter.
 
