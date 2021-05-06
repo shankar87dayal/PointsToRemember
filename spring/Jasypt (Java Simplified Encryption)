@@ -1,0 +1,34 @@
+https://medium.com/engineering-jio-com/a-secure-way-to-encrypt-any-password-in-the-config-file-in-a-spring-boot-project-20d12436b4b9
+https://www.baeldung.com/spring-boot-jasypt
+
+Jasypt, Java Simplified Encryption provides encryption support for property sources in Spring Boot Applications.
+
+
+1) Add dependency jasypt-spring-boot-starter.
+
+2) Add @EnableEncryptableProperties in the Spring Boot Application main Configuration class.
+
+3) Decide a secret key to be used for encryption and decryption. Assume Secret Key: hello
+
+4) Generate Encrypted Key with below 
+https://www.devglan.com/online-tools/jasypt-online-encryption-decryption
+
+Assume 
+The password to encrypt: abcd1234 (It can be any value as per required)
+Secret Key: hello (It can be any value as per required)
+Encrypted key: scEjemHosjc/hjA8saT7Y6uC65bs0swg
+
+5) Add the encrypted key in the config file (csl-oltpbridge.yml or application.properties)
+auth.client_secret=ENC(scEjemHosjc/hjA8saT7Y6uC65bs0swg)
+
+6) Secret key chosen needs to be passed to decrypt at runtime.
+Add below vm arguments while running spring-boot app
+
+-Denv=scrumdev
+-Dvm.name=container-csl-krdalsnb12
+-Dserver.port=8090
+-Djasypt.encryptor.password=hello
+-Dspring.config.location=classpath:/config/scrumdev/csl-oltpbridge.yml
+-Dlog.base=C:\Users\Public\logs
+-Dthin.root=C:\Users\1626260\.m2
+-Dthin.offline=true
