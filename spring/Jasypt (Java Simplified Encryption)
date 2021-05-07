@@ -22,7 +22,24 @@ Encrypted key: scEjemHosjc/hjA8saT7Y6uC65bs0swg
 5) Add the encrypted key in the config file (csl-oltpbridge.yml or application.properties)
 auth.client_secret=ENC(scEjemHosjc/hjA8saT7Y6uC65bs0swg)
 
-6) Secret key chosen needs to be passed to decrypt at runtime.
+6) Two ways to access in code
+
+6.1) @Value("${auth.client_secret}")
+
+    @Value("${auth.client_secret}")
+    private String property;
+
+    public String getProperty() {
+        return property;
+    }
+
+6.2) Using methodgetProperty(String input) of org.springframework.core.env.Environment
+
+    public String getPasswordUsingEnvironment(Environment environment) {
+        return environment.getProperty("auth.client_secret");
+    }
+
+7) Secret key chosen needs to be passed to decrypt at runtime.
 Add below vm arguments while running spring-boot app
 
 -Denv=scrumdev
