@@ -1,0 +1,39 @@
+Repository --> CrudRepository --> PagingAndSortingRepository --> JpaRepository--> SimpleJpaRepository --> QuerydslJpaRepository
+
+
+
+JPQL is Java Persistence Query Language defined in JPA specification
+It's a good approach to place a query definition just above the method inside the repository (as @Query) rather than inside our domain model as named queries (@NamedQuery). 
+The repository is responsible for persistence, so it's a better place to store these definitions (as @Query).
+Thus, use @Query as repository(interface) method.
+
+1. Select 
+
+	@Query("SELECT u FROM User u WHERE u.status = 1")
+	Collection<User> findAllActiveUsers(); 
+	
+	@Query("SELECT u FROM User u WHERE u.status = ?1 and u.name = ?2")
+	User findUserByStatusAndName(Integer status, String name);//status assigned to 1, name assigned to 2.
+
+	@Query("SELECT u FROM User u WHERE u.status = :status and u.name = :name")
+	User findUserByStatusAndNameNamedParams(@Param("status") Integer status, @Param("name") String name);
+
+2. Update
+
+	@Modifying
+	@Query("update User u set u.status = :status where u.name = :name")
+	int updateUserSetStatusForName(@Param("status") Integer status, @Param("name") String name);
+
+3. Insert 
+
+	@Modifying
+	@Query(value = "insert into Users (name, age, email, status) values (:name, :age, :email, :status)", nativeQuery = true)
+	void insertUser(@Param("name") String name, @Param("age") Integer age, @Param("status") Integer status, @Param("email") String email);
+
+4. Delete
+
+	@Modifying
+	@Query("delete from Users b where b.name=:name")
+	void deleteUserByName(@Param("name") String name);
+
+***RSQL = RESTful Service Query Language
