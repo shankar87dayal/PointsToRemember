@@ -1,0 +1,66 @@
+To log with mvn
+
+https://www.baeldung.com/maven-logging
+
+-e or –errors ===> By default, Maven only logs the info, warning, and error logs. 
+		Also, for errors, it doesn't show the full stacktrace of that log. 
+		In order to see the full stacktrace, we can use the -e or –errors option.
+-X or –debug option ==> To see debug level logs
+
+mvn -e -X clean compile
+
+--log-file log_file_path ==> To log all in given log file.
+
+-f build_pom.xml ==> For custom pom file other than pom.xml(Default)
+
+
+--log-file C:\Users\Public\logs\mvn.log -e clean install -f build_pom.xml
+
+To active profile at runtime with mvn
+mvn clean install -Pdev
+mvn clean install -P dev
+
+
+
+===========================================Test case related=========================================
+
+
+-Dmaven.test.skip=true  ==> To skip all unit tests 
+
+# Test one class
+mvn test -Dtest=AppTest
+# Test one method
+mvn test -Dtest=AppTest#testFoo
+# Test two methods with the plus sign (+)
+mvn test -Dtest=AppTest#testFoo+testBar
+# Test multiple items comma separated and with a wildcard (*)
+mvn test -Dtest=AppTest,Web*
+# Test by Package with a wildcard (*)
+mvn test -Dtest=com.mycompany.*.*Test
+
+Maven: Exclude specific test(s)
+# Exclude one test class, by using the explanation mark (!)
+mvn test -Dtest=!LegacyTest
+# Exclude one test method
+mvn verify -Dtest=!LegacyTest#testFoo
+# Exclude two test methods
+mvn verify -Dtest=!LegacyTest#testFoo+testBar
+# Exclude a package with a wildcard (*)
+mvn test -Dtest=!com.mycompany.app.Legacy*
+
+
+=========================================Run as spring boot app with vm argument====================================================================
+
+-Denv=scrumdev
+-Dvm.name=CONTAINER
+-Dserver.port=8091
+-Djasypt.encryptor.password=Hello
+-Dspring.config.location=classpath:/config/scrumdev/UAT-bridge.yml
+-Dlog.base=C:\Users\Public\logs
+-Dthin.root=C:\Users\shankar\.m2
+-Dthin.offline=true
+
+
+
+
+
