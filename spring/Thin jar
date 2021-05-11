@@ -1,5 +1,5 @@
 1) Add dependency "spring-boot-thin-layout" under dependencies for plugin "spring-boot-maven-plugin".
-2) --log-file C:\Users\Public\logs\mvn.log -e clean install -f build_pom.xml
+2) --log-file C:\Users\Public\logs\mvn.log -e clean install -f build_pom.xml -Dthin.root=C:\Users\shankar\.m2
 3) The whole point of thin jars is to avoid bundling the dependencies with the application. However, dependencies don't magically disappear, they're simply stored elsewhere.
 If Fat jar size is 150 mb then Thin jar size is 20 mb
 
