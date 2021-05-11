@@ -1,0 +1,21 @@
+https://stackoverflow.com/questions/52498171/how-to-handle-security-enable-csrf-in-spring-boot-2
+
+
+
+In order to have backward compatibility with the property already been set in you application, security.enable-csrf=true, you can use the following code:
+
+@EnableWebSecurity
+public class WebSecurityConfig extends
+WebSecurityConfigurerAdapter {
+
+    @Value("${security.enable-csrf}")
+    private boolean csrfEnabled;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        if (!csrfEnabled) {
+            http.csrf().disable();
+        }
+    }
+}
+As you might guess the magic comes from http.csrf().disable(); that in the above code you can control enabling/disabling it by the property you have set in you application.properties file.
