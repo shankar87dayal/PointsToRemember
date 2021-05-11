@@ -18,4 +18,18 @@ WebSecurityConfigurerAdapter {
         }
     }
 }
-As you might guess the magic comes from http.csrf().disable(); that in the above code you can control enabling/disabling it by the property you have set in you application.properties file.
+As you might guess the magic comes from http.csrf().disable(); 
+that in the above code you can control enabling/disabling it by the property you have set in you application.properties file.
+
+
+
+A CSRF token is generated based on Http Session. 
+If your API is holding the http session, you properly wanna to secure it with CSRF token.
+BuT most REST services are designed to be stateless, in that case you cannot/shouldn't/wouldn't use a CSRF token.
+
+//TO generate 
+@RequestMapping(value="/csrf-token", method=RequestMethod.GET)
+public @ResponseBody String getCsrfToken(HttpServletRequest request) {
+    CsrfToken token = (CsrfToken)request.getAttribute(CsrfToken.class.getName()); // Interface org.springframework.security.web.csrf.CsrfToken ==> Provides the information about an expected CSRF token.
+    return token.getToken();
+}
