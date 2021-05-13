@@ -1,0 +1,27 @@
+1)	Download SonarQube latest
+https://www.sonarqube.org/downloads/
+https://docs.sonarqube.org/latest/
+
+2)	Download jdk 11 if not Available as SonarQube 7 onwards need jdk 11.
+
+https://www.oracle.com/java/technologies/javase-downloads.html
+
+3)	Find port which is not used because default port 9000 is already used. In my case 9090 is free.
+netstat -ano | findStr "9090"
+To kill pid
+taskkill /F /PID 26188
+
+4)	In Sonar.properties under conf folder put below line 
+sonar.web.port=9080
+
+5)	Update jdk 11 
+In wrapper.conf under conf folder put below line
+wrapper.java.command=C:\Users\shankar\software\jdk-11.0.8\jdk-11.0.8\bin\java.exe
+
+6)	cmd to below path and StartSonar
+Under C:\Users\shankar\software\sonar\sonarqube-7.9.4\bin\windows-x86-64
+
+7)	In browser, to start sonarQube
+http://localhost:9090/
+With default credential admin/admin
+Updated credential admin/admin1
