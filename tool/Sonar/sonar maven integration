@@ -1,0 +1,37 @@
+Steps to Analyse Maven Project Code Coverage in SonarQube :
+
+1) Create a Project in SonarQube Dashboard itself
+            -> Give ProjectKey & ProjectName
+            -> Generate a token(Keep the token safely)
+
+2) Add following properties in sonar.properties file under conf folder
+            sonar.web.port=9090(I am using 9090)
+            sonar.projectKey=Bridge-Batch-Service_1 (In local this project must be available and use token of this project only)
+            sonar.projectName=Bridge-Batch-Service_1 (In local this project must be available and use token of this project only)
+            sonar.host.url=http://localhost:9090
+
+3) Do below changes in settings.xml file under .m2 folder
+            <profile>
+                        <id>sonar</id>
+                        <activation>
+                                    <activeByDefault>true</activeByDefault>
+                        </activation>
+                        <properties>
+                              <sonar.jdbc.url>jdbc:h2:tcp://10.20.239.147:9092/sonar</sonar.jdbc.url>
+                                    <sonar.jdbc.username>sonar</sonar.jdbc.username>
+                                    <sonar.jdbc.password>sonar</sonar.jdbc.password>
+                                    <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                                   <sonar.host.url>http://localhost:9090</sonar.host.url>
+                        </properties>
+            </profile>
+
+4) Open Command Prompt under project directory
+(C:\Users\1626258\KOREA_OLTP_Bridge\Sprint_7\NGKOREA-1305_workspace\cib-svc-bridge-batch-services\project)
+
+5) Run the below command
+To enable proxy setting in Maven
+Add <nonProxyHosts>localhost</nonProxyHosts> under <proxy> (which is under <proxies>)
+
+
+To run project in sonar
+mvn clean install sonar:sonar -Dsonar.host.url=http://localhost:9090 -Dsonar.login=99b1b278f9a39320a00eebc6403ca1a8035227af --log-file C:\Users\Public\logs\mvn.log
