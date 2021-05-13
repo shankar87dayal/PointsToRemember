@@ -2,6 +2,9 @@
 https://www.sonarqube.org/downloads/
 https://docs.sonarqube.org/latest/
 
+*** Architecture of Sonar
+https://docs.sonarqube.org/latest/architecture/architecture-integration/
+
 2)	Download jdk 11 if not Available as SonarQube 7 onwards need jdk 11.
 
 https://www.oracle.com/java/technologies/javase-downloads.html
