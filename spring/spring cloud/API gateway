@@ -1,0 +1,19 @@
+API gateway component/project of spring cloud.
+
+This is use to define non funtional requirement (cross cutiing concerned) which are common across all microservices.
+Non funtional requirement (cross cutiing concerned) across all microservice which are common across all microservices.
+1) Security - SSL, Authentication, Authorizetion, Encryption, Decryption
+2) Tracing - To trace and analyze user requests as they travel through API Gateway to the underlying Microservices.
+3) Service Aggregation - One particular microsrvice interact with other microservices.
+4) Rate Limits - To see and put limit on amount of resources used in cloud environment(AWS, Azure).
+5) API Routing (As per request, i will get routed to respective micro-service API)
+6) Device Routing, 
+7) Billing
+8) Adaptor
+To batch API requests sequentially into a single API call. 
+Rather than multiple round trips to a server, a client can make one API request with a chain of calls and receive one response.
+https://stoplight.io/api-types/composite-api/
+9) Cache
+10) Server side Load Balancer
+11) Canary Releases (version 1 consume 95% and new beta version 2 consume 5%. When version 2 is fully tested then consume 100%  )
+12) Protocol conversion
