@@ -11,9 +11,14 @@ Non funtional requirement (cross cutiing concerned) across all microservice whic
 7) Billing
 8) Adaptor
 To batch API requests sequentially into a single API call. 
+Adapter will decide what client want.
 Rather than multiple round trips to a server, a client can make one API request with a chain of calls and receive one response.
 https://stoplight.io/api-types/composite-api/
-9) Cache
+
+9) Cache 
+Assume for each 1 hour, product list is get refereshed with new products.
+For this, we will mantain cache with threashold = 1 hour.
 10) Server side Load Balancer
 11) Canary Releases (version 1 consume 95% and new beta version 2 consume 5%. When version 2 is fully tested then consume 100%  )
 12) Protocol conversion
+13) Static content can be deployed in API gaateway to reduce hit to microservice if only static content is requested.
