@@ -1,0 +1,23 @@
+PermGen
+==========
+It is removed from java 8.
+PermGen always has a fixed maximum size.
+Inside Java Heap Memory.
+Ineffiecient garbage collection.
+To set maximum PermGen, -XX:MaxPermSize=200m //  ‘g' for GB, ‘m' for MB and ‘k' for KB.
+
+
+MetaSpace
+===========
+It is introduced in Java 8.
+Metaspace by default auto increases its size depending on the underlying OS.
+Inside Native Memory(provided by underlying OS).
+Effiecient garbage collection.
+To set maximum PermGen, -XX:MaxMetaspaceSize=1024m
+
+
+***If we want to restart the server as soon as out of memory occur, we can set the parameter
+-XX:OnOutOfMemoryError="shutdown -r"
+
+***If we want to assign minimum 2 GB and maximum 5 GB to JVM, we need to write:
+-Xms2G -Xmx5G // -Xms means minimal heap size and -Xmx means maximal heap size
