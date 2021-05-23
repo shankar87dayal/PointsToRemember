@@ -10,7 +10,7 @@ To set maximum PermGen, -XX:MaxPermSize=200m //  ‘g' for GB, ‘m' for MB and 
 MetaSpace
 ===========
 It is introduced in Java 8.
-Metaspace by default auto increases its size depending on the underlying OS.
+It can grow its size dynamically depending on the underlying OS and do not have any size constraint.
 Inside Native Memory(provided by underlying OS).
 Effiecient garbage collection.
 To set maximum PermGen, -XX:MaxMetaspaceSize=1024m
