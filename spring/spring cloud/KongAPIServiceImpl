@@ -1,0 +1,52 @@
+package com.dayal.service.thirdParty;
+
+import com.dayal.component.rest.CustomRestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
+import java.util.HashMap;
+
+@Service
+public class KongAPIServiceImpl implements KongAPIService{
+    @Value("${url.KongAPI}")
+    private String KongAPIUrlValue; //  http://IP Address:50001/api/oauth2/token
+
+    @Value("${thirdParty.auth.client_id}")
+    private String clientId; // "client_id": "KongAPIClient",
+
+    @Value("${thirdParty.auth.client_secret}")
+    private String clientSecret; // "client_secret": "Alphanumeric",
+
+    @Value("${thirdParty.auth.grant_type}")
+    private String grantType; // "grant_type": "client_credentials"
+
+    @Autowired
+    CustomRestTemplate customRestTemplate;
+	
+	// Request is JSON body with clientId, clientSecret, grantType.
+	// KongAPIUrlValue as URL with POST method.
+	
+	//Response is JSON with "token_type", "access_token", "expires_in"
+
+    public String getKongAPI () {
+        MultiValueMap<String, String> requestData = new LinkedMultiValueMap<String, String>();
+        requestData.add("client_id", clientId);
+        requestData.add("client_secret", clientSecret);
+        requestData.add("grant_type", grantType);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(requestData, headers);
+
+        ResponseEntity<HashMap<String, String>> response = customRestTemplate.exchange("thirdParty", KongAPIUrlValue, HttpMethod.POST, entity,	HashMap.class);
+
+        String accessToken = response.getBody().get("access_token"); // Valid for 15 mins
+
+        return accessToken;
+    }
+}
