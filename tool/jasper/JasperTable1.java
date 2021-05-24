@@ -29,7 +29,7 @@ public class JasperTable1 {
 		String xmlFile = "src/main/resources/jrxml/table.jrxml"; //Step 1
 		JasperReport jreport = JasperCompileManager.compileReport(xmlFile); //Step 2
 		//
-		jasperPrintList.add(getJasperPrint1(jreport));//Step 2
+		jasperPrintList.add(getJasperPrint1(jreport));//Step 3
 		jasperPrintList.add(getJasperPrint2(jreport));
 		jasperPrintList.add(getJasperPrint3(jreport));
 		jasperPrintList.add(getJasperPrint4(jreport));
