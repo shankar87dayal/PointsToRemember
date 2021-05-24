@@ -50,4 +50,35 @@ public class KongAPIServiceImpl implements KongAPIService{
 
         return accessToken;
     }
+    
+    public List<ServerResponse> clientRequestuest(ClientRequest clientRequest)
+			throws JsonProcessingException,ResponseException {
+	
+		List<ServerResponse> responseList = new ArrayList<ServerResponse>();
+		ResponseEntity<ServerResponse> response = null;
+		ServerResponse serverResponse = null;
+			
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		headers.setContentType(MediaType.APPLICATION_JSON);	
+		String authToken = getKongAPI ();
+		if(authToken != null) {	
+			headers.setBearerAuth(authToken);
+		}else {
+			log.debug("Token generated is null");
+			headers.setBearerAuth(null);
+		}
+		do {
+			HttpEntity<ClientRequest> requestEntity = new HttpEntity<ClientRequest>(clientRequest, headers);
+			response = restTemplate.exchange(KongAPIUrlValue, HttpMethod.POST, requestEntity, ServerResponse.class);
+					
+			serverResponse = response.getBody();
+			if (serverResponse.getError() != null) {
+				log.error("Error occurred in Withholding Tax Receipt Response : {}", serverResponse.getError());
+				throw new ResponseException(serverResponse.getError()); }
+			responseList.add(serverResponse);			
+		} while (!(Objects.isNull(response.getBody().getData())));			
+		return responseList;
+	}
+	
 }
