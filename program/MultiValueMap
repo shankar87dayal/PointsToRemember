@@ -1,0 +1,17 @@
+One key with many values
+============================
+
+org.springframework.util.MultiValueMap<String, Integer> springSubscribers = new org.springframework.util.LinkedMultiValueMap<>();
+springSubscribers.add("topic.a", 8);
+springSubscribers.add("topic.a", 19);
+springSubscribers.add("topic.a", 3);
+springSubscribers.add("topic.a", 4);
+springSubscribers.add("topic.b", 1);
+System.out.println(springSubscribers.get("topic.a")); // [8, 19, 3, 4]
+System.out.println(springSubscribers.get("topic.b")); // [1]
+System.out.println(springSubscribers.size()); // 2
+    	
+boolean containsKey = springSubscribers.containsKey("topic.a"); //true
+springSubscribers.addIfAbsent("topic.c", 47);
+System.out.println(springSubscribers.get("topic.c")); //[47]
+System.out.println(springSubscribers.size()); // 3
