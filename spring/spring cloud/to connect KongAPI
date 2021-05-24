@@ -1,6 +1,6 @@
 package com.dayal.service.thirdParty;
 
-import com.dayal.component.rest.CustomRestTemplate;
+import com.dayal.component.rest.restTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -25,7 +25,7 @@ public class KongAPIServiceImpl implements KongAPIService{
     private String grantType; // "grant_type": "client_credentials"
 
     @Autowired
-    CustomRestTemplate customRestTemplate;
+    RestTemplate restTemplate;
 	
 	// Request is JSON body with clientId, clientSecret, grantType.
 	// KongAPIUrlValue as URL with POST method.
@@ -41,9 +41,10 @@ public class KongAPIServiceImpl implements KongAPIService{
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(requestData, headers);
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestData, headers);
+		
 
-        ResponseEntity<HashMap<String, String>> response = customRestTemplate.exchange("thirdParty", KongAPIUrlValue, HttpMethod.POST, entity,	HashMap.class);
+        ResponseEntity<HashMap<String, String>> response = restTemplate.exchange(KongAPIUrlValue, HttpMethod.POST, requestEntity, HashMap.class);
 
         String accessToken = response.getBody().get("access_token"); // Valid for 15 mins
 
