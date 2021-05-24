@@ -1,3 +1,5 @@
+// To connect 3rd party producerAPI with KongAPI
+
 package com.dayal.service.thirdParty;
 
 import com.dayal.component.rest.restTemplate;
@@ -51,8 +53,7 @@ public class KongAPIServiceImpl implements KongAPIService{
         return accessToken;
     }
     
-    public List<ServerResponse> clientRequestuest(ClientRequest clientRequest)
-			throws JsonProcessingException,ResponseException {
+    public List<ServerResponse> clientRequestuest(ClientRequest clientRequest) throws JsonProcessingException,ResponseException {
 	
 		List<ServerResponse> responseList = new ArrayList<ServerResponse>();
 		ResponseEntity<ServerResponse> response = null;
@@ -74,7 +75,7 @@ public class KongAPIServiceImpl implements KongAPIService{
 					
 			serverResponse = response.getBody();
 			if (serverResponse.getError() != null) {
-				log.error("Error occurred in Withholding Tax Receipt Response : {}", serverResponse.getError());
+				log.error("Error occurred in Response : {}", serverResponse.getError());
 				throw new ResponseException(serverResponse.getError()); }
 			responseList.add(serverResponse);			
 		} while (!(Objects.isNull(response.getBody().getData())));			
