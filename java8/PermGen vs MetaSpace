@@ -13,7 +13,7 @@ It is introduced in Java 8.
 It can grow its size dynamically depending on the underlying OS and do not have any size constraint.
 Inside Native Memory(provided by underlying OS).
 Effiecient garbage collection.
-To avoid "java.lang.OutOfMemoryError: Metaspace" set maximum MetaSpace, -XX:MaxMetaspaceSize=1024m
+To avoid "java.lang.OutOfMemoryError: Metaspace" set maximum MetaSpace by -XX:MaxMetaspaceSize=1024m
 
 
 ***If we want to restart the server as soon as out of memory occur, we can set the parameter
