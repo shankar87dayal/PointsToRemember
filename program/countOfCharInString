@@ -1,0 +1,64 @@
+public static void countOfCharInString(String strInput){ // 123994555789
+		String[] strArray = strInput.split("");
+		Map<String,Integer> strMap = new LinkedHashMap<>();
+		
+		for(String str:strArray) {
+			if(strMap.containsKey(str))
+				strMap.put(str, strMap.get(str)+1);
+			else
+				strMap.put(str, 1);
+		}
+		System.out.println(strMap);
+		
+		StringBuilder stringBuilderUnique = new StringBuilder();
+		StringBuilder stringBuilderDuplicate = new StringBuilder();
+		Set<Map.Entry<String, Integer>> entrySet = strMap.entrySet();
+		
+		for(Map.Entry<String, Integer> entry : entrySet) {
+			
+			if(entry.getValue() == 1)
+				stringBuilderUnique.append(entry.getKey());
+			if(entry.getValue() > 1)
+				stringBuilderDuplicate.append(entry.getKey());
+		}
+		
+		String stringUnique = stringBuilderUnique.toString();
+		String stringDuplicate = stringBuilderDuplicate.toString();
+		System.out.println("stringUnique: " + stringUnique);
+		System.out.println("stringDuplicate: " + stringDuplicate);
+		
+		
+		String[] splitStringUnique = stringUnique.split("");
+		String[] splitStringDuplicate = stringDuplicate.split("");
+		
+		System.out.println("Unique character order ");
+		for(int i = 0; i < splitStringUnique.length ;i++) {
+			System.out.println((i+1) + "=>" + splitStringUnique[i]); 
+		}
+		
+		System.out.println("Duplicate character order ");
+		for(int i = 0; i < splitStringDuplicate.length ;i++) {
+			System.out.println((i+1) + "=>" + splitStringDuplicate[i]);
+		}
+		
+	}
+  
+ Output:
+ ================
+  
+{1=1, 2=1, 3=1, 9=3, 4=1, 5=3, 7=1, 8=1}
+
+stringUnique: 123478
+stringDuplicate: 95
+
+Unique character order 
+1=>1
+2=>2
+3=>3
+4=>4
+5=>7
+6=>8
+
+Duplicate character order 
+1=>9
+2=>5
