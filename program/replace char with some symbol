@@ -1,0 +1,17 @@
+public static String replaceCheck() {
+		String originalStr= "AmbacA";
+		System.out.println("originalStr:-"+ originalStr);
+		String replaceAll = originalStr.replaceAll("(?i)"+"A", "z"); // Replace a/A with z
+		System.out.println("replaceAll:-"+ replaceAll);
+		
+		
+		boolean instance = originalStr instanceof String;
+		System.out.println("instance:"+instance);
+		
+		return replaceAll;
+	}
+
+Output:
+========
+originalStr:-AmbacA
+replaceAll:-zmbzcz
