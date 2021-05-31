@@ -1,0 +1,7 @@
+Cloudwatch - Global. To moniter Events, CPU utilization, Logs, Alarms.
+
+S3- To store static files (with/without encryption).
+
+EC2 - To track status of instance of server deployed. For manual scaling if required.
+
+Lambda - To implement Serverless. A virtual functions which is limited by time, run on demand, automatic scaling
