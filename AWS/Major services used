@@ -1,7 +1,11 @@
 Cloudwatch - Global. To moniter Events, CPU utilization, Logs, Alarms.
 
-S3- To store static files (with/without encryption).
+S3- Serverless.To store static files (with/without encryption)
 
 EC2 - To track status of instance of server deployed. For manual scaling if required.
 
-Lambda - To implement Serverless. A virtual functions which is limited by time, run on demand, automatic scaling
+
+Lambda(FaaS Function as a service) - 
+Serverless. Specific to region. 
+Develope will deploy lambda function and don't have to manage server for it. Thus serverless for developer. 
+A virtual functions which is limited by time(max 15 min), run on demand, automatic scaling
