@@ -8,12 +8,19 @@ Client Need - UAT (User Acceptance Test) / UVT (User Verification Test)
 
 ==================Types of Environments==================
 
-1) (child branch of develop branch) Local dev.
-2) (child branch of develop branch)  Scrumdev in AWS.
+1) (child branch of release branch of develop branch) Local dev.
+2) (child branch of release branch of develop branch)  Scrumdev in AWS.
 3) (develop branch) SIT 3(Integration testing) via VX pipeline.
 4) (master branch) UAT environment.
 5) (master branch) PROD.
 
+
+==================Types of Branch==================
+1) Bugfix -- For fixing bug, sonarQube
+2) Feature -- For new feature
+3) HotFix -- For urgent production bug
+4) Release -- For each MVP release
+5) Custom -- If not of any above types
 
 Commit & push the change, Raise PR with proper approver, Approver approve PR if no issue, PR Build can auto start/manually via jenkin, Merged to develop by approver.
 
