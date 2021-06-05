@@ -1,0 +1,35 @@
+https://www.javatpoint.com/classloader-in-java
+https://www.geeksforgeeks.org/classloader-in-java/
+
+Not all classes are loaded by a single ClassLoader. Depending on the type of class and the path of class, the ClassLoader that loads that particular class is decided. To know the ClassLoader that loads a class the getClassLoader() method is used. All classes are loaded based on their names and if any of these classes are not found then it returns a NoClassDefFoundError or ClassNotFoundException.
+
+A Java Classloader is of three types:
+
+1) BootStrap ClassLoader: A Bootstrap Classloader is a Machine code which kickstarts the operation when the JVM calls it. 
+It is not a java class. Its job is to load the first pure Java ClassLoader. 
+Bootstrap ClassLoader loads classes from the location rt.jar. Bootstrap ClassLoader doesn’t have any parent ClassLoaders. 
+It is also called as the Primodial ClassLoader.
+
+
+2) Extension ClassLoader: The Extension ClassLoader is a child of Bootstrap ClassLoader and loads the extensions of core java classes from the respective JDK Extension library. 
+It loads files from jre/lib/ext directory or any other directory pointed by the system property java.ext.dirs.
+
+
+3) System/Application ClassLoader: An Application ClassLoader is also known as a System ClassLoader. 
+It loads the Application type classes found in the environment variable CLASSPATH, -classpath or -cp command line option. 
+The Application ClassLoader is a child class of Extension ClassLoader.
+
+
+Note: 
+The ClassLoader Delegation Hierarchy Model always functions in the order Application ClassLoader->Extension ClassLoader->Bootstrap ClassLoader. 
+The Bootstrap ClassLoader is always given the higher priority, next is Extension ClassLoader and then Application ClassLoader.
+
+Suppose that we have an application specific class Demo.class. 
+The request for loading of this class files transfers to Application ClassLoader. 
+It delegates to its parent Extension ClassLoader. 
+Further, it delegates to Bootstrap ClassLoader. 
+Bootstrap search that class in rt.jar and since that class is not there. 
+Now request transfer to Extension ClassLoader which searches for the directory jre/lib/ext and tries to locate this class there. 
+If the class is found there, Extension ClassLoader loads that class.
+Application ClassLoader never loads that class.
+When the extension ClassLoader does not load it, then Application ClaasLoader loads it from CLASSPATH in Java.
