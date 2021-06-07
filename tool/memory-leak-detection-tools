@@ -1,3 +1,12 @@
 Eclipse MAT, Dynatrace
 
 https://www.baeldung.com/java-memory-leaks
+
+Memory Leak Through static Fields
+Through Unclosed Resources
+Improper equals() and hashCode() Implementations
+Inner Classes That Reference Outer Classes
+Overriding finalize() Methods
+Interned Strings
+Using ThreadLocals
+Many more....
