@@ -1,7 +1,7 @@
 PermGen
 ==========
 It is removed from java 8.
-PermGen always has a fixed maximum size.
+PermGen always has a fixed maximum size and don't grow its size dynamically.
 Inside Java Heap Memory inside JVM.
 Ineffiecient garbage collection.
 To avoid "java.lang.OutOfMemoryError: PermGen space" set maximum PermGen by -XX:MaxPermSize=200m //  ‘g' for GB, ‘m' for MB and ‘k' for KB.
