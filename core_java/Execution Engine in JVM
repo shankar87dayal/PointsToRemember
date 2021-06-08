@@ -1,0 +1,14 @@
+Execution Engine in JVM
+This component executes the bytecode which is assigned to the runtime data areas through the classloader.
+The execution engine has three major sub-components
+
+1) Interpreter: This component reads the bytecode instructions and executes them in a sequential manner. 
+The component runs the application from the command line by accepting a filename argument.
+
+2) JIT (Just In Time) Compiler: This component counterbalance the Interpreter’s disadvantage of slow execution and improves the performance. 
+JIT compiler compiles the similar part of the bytecode at the same time and thus reduces the total time needed for compilation. 
+The compiler in this component refers to a translator which converts the JVM instruction set to the OS-specific instruction set.
+
+3) Garbage Collection: This component is a part of execution engine which frees up the memory by collecting and removing the unreferenced objects
+
+https://www.javacodegeeks.com/2018/04/jvm-architecture-execution-engine-in-jvm.html
