@@ -2,7 +2,7 @@ PermGen
 ==========
 It is removed from java 8.
 PermGen always has a fixed maximum size.
-Inside Java Heap Memory.
+Inside Java Heap Memory inside JVM.
 Ineffiecient garbage collection.
 To avoid "java.lang.OutOfMemoryError: PermGen space" set maximum PermGen by -XX:MaxPermSize=200m //  ‘g' for GB, ‘m' for MB and ‘k' for KB.
 
@@ -11,7 +11,7 @@ MetaSpace
 ===========
 It is introduced in Java 8.
 It can grow its size dynamically depending on the underlying OS and do not have any size constraint.
-Inside Native Memory(provided by underlying OS).
+Inside Native Memory/Off-heap(provided by underlying OS) inside process of OS.
 Effiecient garbage collection.
 To avoid "java.lang.OutOfMemoryError: Metaspace" set maximum MetaSpace by -XX:MaxMetaspaceSize=1024m
 
@@ -21,3 +21,12 @@ To avoid "java.lang.OutOfMemoryError: Metaspace" set maximum MetaSpace by -XX:Ma
 
 ***If we want to assign minimum 2 GB and maximum 5 GB to JVM, we need to write:
 -Xms2G -Xmx5G // -Xms means minimal heap size and -Xmx means maximal heap size
+
+Type of memory
+-----------------
+
+1) Heap memory: memory within the JVM process that is used to hold Java Objects and is maintained by the JVMs Garbage Collector.
+
+2) Native memory/Off-heap: is memory allocated within the processes address space that is not within the heap and thus is not freed up by the Java Garbage Collector.
+
+3) Direct memory: is similar to native, but also implies that an underlying buffer within the hardware is being shared. For example, a buffer within the network adapter or graphics display. The goal here is to reduce the number of times the same bytes is being copied about in memory.
