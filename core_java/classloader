@@ -1,13 +1,23 @@
 https://www.javatpoint.com/classloader-in-java
 https://www.geeksforgeeks.org/classloader-in-java/
 
-Not all classes are loaded by a single ClassLoader. Depending on the type of class and the path of class, the ClassLoader that loads that particular class is decided. To know the ClassLoader that loads a class the getClassLoader() method is used. All classes are loaded based on their names and if any of these classes are not found then it returns a NoClassDefFoundError or ClassNotFoundException.
+Not all classes are loaded by a single ClassLoader. 
+Depending on the type of class and the path of class, the ClassLoader that loads that particular class is decided. 
+To know the ClassLoader that loads a class the getClassLoader() method is used.
+All classes are loaded based on their names and if any of these classes are not found then it returns a NoClassDefFoundError or ClassNotFoundException.
+
+Java runtime throws ClassNotFoundException (checked exception) while trying to load a class at runtime only and the name was provided during runtime.
+
+NoClassDefFoundError is a fatal error. It occurs when a compiler could successfully compile the class, but Java runtime could not locate the class file. 
+It usually happens when there is an exception while executing a static block or initializing static fields of the class, so class initialization fails.
+
+https://www.baeldung.com/java-classnotfoundexception-and-noclassdeffounderror
+=======================================================================================================================================
 
 A Java Classloader is of three types:
 
 1) BootStrap ClassLoader: A Bootstrap Classloader is a Machine code which kickstarts the operation when the JVM calls it. 
-It is not a java class. Its job is to load the first pure Java ClassLoader. 
-Bootstrap ClassLoader loads classes from the location rt.jar. Bootstrap ClassLoader doesn’t have any parent ClassLoaders. 
+It is not a java class.It loads classes from the location rt.jar. Bootstrap ClassLoader doesn’t have any parent ClassLoaders. 
 It is also called as the Primodial ClassLoader.
 
 
@@ -15,21 +25,27 @@ It is also called as the Primodial ClassLoader.
 It loads files from jre/lib/ext directory or any other directory pointed by the system property java.ext.dirs.
 
 
-3) System/Application ClassLoader: An Application ClassLoader is also known as a System ClassLoader. 
-It loads the Application type classes found in the environment variable CLASSPATH, -classpath or -cp command line option. 
+3) System/Application ClassLoader: It loads the Application type classes found in the environment variable CLASSPATH, -classpath or -cp command line option. 
 The Application ClassLoader is a child class of Extension ClassLoader.
 
 
 Note: 
-The ClassLoader Delegation Hierarchy Model always functions in the order Application ClassLoader->Extension ClassLoader->Bootstrap ClassLoader. 
-The Bootstrap ClassLoader is always given the higher priority, next is Extension ClassLoader and then Application ClassLoader.
 
-Suppose that we have an application specific class Demo.class. 
-The request for loading of this class files transfers to Application ClassLoader. 
-It delegates to its parent Extension ClassLoader. 
-Further, it delegates to Bootstrap ClassLoader. 
-Bootstrap search that class in rt.jar and since that class is not there. 
-Now request transfer to Extension ClassLoader which searches for the directory jre/lib/ext and tries to locate this class there. 
-If the class is found there, Extension ClassLoader loads that class.
-Application ClassLoader never loads that class.
-When the extension ClassLoader does not load it, then Application ClaasLoader loads it from CLASSPATH in Java.
+Class loader follows the following rule:
+
+1) It checks if the class is already loaded.
+2) If the class is not loaded, delagate request to parent and ask parent class loader to load the class.
+3) If parent class loader cannot load class, then child class loader will load class.
+
+****Delegation Hierarchy Order 
+  Application ClassLoader->Extension ClassLoader->Bootstrap ClassLoader. 
+****Class loading Order
+The Bootstrap ClassLoader is always given the higher priority -> next is Extension ClassLoader -> then Application ClassLoader.
+
+JVM follows the Delegation-Hierarchy principle to load classes. 
+System class loader delegate load request to extension class loader and extension class loader delegate request to the bootstrap class loader. 
+If a class found in the boot-strap path, the class is loaded otherwise request again transfers to the extension class loader and then to the system class loader. 
+At last, if the system class loader fails to load class, then we get run-time exception java.lang.ClassNotFoundException. 
+
+Visibility principle states that child ClassLoader can see the class loaded by the parent ClassLoader, but vice versa is not true. 
+It means if Application ClassLoader loads Demo.class, in such case, trying to load Demo.class explicitly using Extension ClassLoader throws java.lang.ClassNotFoundException.
