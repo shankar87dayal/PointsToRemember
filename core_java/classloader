@@ -6,9 +6,9 @@ Depending on the type of class and the path of class, the ClassLoader that loads
 To know the ClassLoader that loads a class the getClassLoader() method is used.
 All classes are loaded based on their names and if any of these classes are not found then it returns a NoClassDefFoundError or ClassNotFoundException.
 
-Java runtime throws ClassNotFoundException (checked exception) while trying to load a class at runtime only and the name was provided during runtime.
+****ClassNotFoundException is a checked exception which occurs when an application tries to load a class through its fully-qualified name and can not find its definition on the classpath.
 
-NoClassDefFoundError is a fatal error. It occurs when a compiler could successfully compile the class, but Java runtime could not locate the class file. 
+****NoClassDefFoundError is a fatal error. It occurs when a compiler could successfully compile the class, but Java runtime could not locate the class file. 
 It usually happens when there is an exception while executing a static block or initializing static fields of the class, so class initialization fails.
 
 https://www.baeldung.com/java-classnotfoundexception-and-noclassdeffounderror
