@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FeeReportEN" pageWidth="1700" pageHeight="1600" columnWidth="1620" leftMargin="40" rightMargin="40" topMargin="40" bottomMargin="40" uuid="054ebe6f-3c1a-409e-8896-297aa80a04e4">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Base" isDefault="true" pdfFontName="fonts/ARIALUNI.TTF" pdfEncoding="Identity-H"/>
+	<style name="TableHeader" hAlign="Center" vAlign="Middle" isBold="true">
+		<box>
+			<pen lineWidth="0.0"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="TableCell" hAlign="Center" vAlign="Middle">
+		<box>
+			<pen lineWidth="0.0"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="0.0"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<subDataset name="dataset1" uuid="d2760fbd-a774-4ce9-9d73-de7538f4eaee">
+		<field name="feeType" class="java.lang.String"/>
+		<field name="ccy" class="java.lang.String"/>
+		<field name="volume" class="java.lang.Integer"/>
+		<field name="amount" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="feeInfoList" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="clientName" class="java.lang.String"/>
+	<parameter name="groupId" class="java.lang.String"/>
+	<parameter name="brnId" class="java.lang.String"/>
+	<parameter name="startPeriod" class="java.lang.String"/>
+	<parameter name="endPeriod" class="java.lang.String"/>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="totalVolume" class="java.lang.Integer"/>
+	<parameter name="totalAmount" class="java.math.BigDecimal"/>
+	<parameter name="footerCurentPageCount" class="java.lang.Integer"/>
+	<parameter name="footerTotalPageCount" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="500" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="810" height="60" forecolor="#0B56A9" uuid="540c313f-1fd5-40ea-bda7-339cfcccec54"/>
+				<textElement textAlignment="Left" markup="html">
+					<font size="40" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[FEE REPORT - MONTHLY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="150" height="30" forecolor="#0B56A9" uuid="20b49094-a7ca-44da-aea0-eef46feb6fc1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="20" isBold="false" pdfFontName="fonts/Inter-Regular.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Generated on:]]></text>
+			</staticText>
+			<textField pattern="EEE dd MMM YYYY, hh:mm:ss a">
+				<reportElement x="150" y="70" width="400" height="30" forecolor="#5D5D5D" uuid="db10c9db-2d93-48ff-a0fe-fb9927af5cc7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="20" isBold="false" pdfFontName="fonts/Inter-Regular.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="1349" y="-2" width="259" height="103" uuid="9ca5c8d1-51d0-47d7-8b7a-d1c03c5fbb86"/>
+				<imageExpression><![CDATA["images/standard-chartered-logo.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="-35" y="125" width="1700" height="1" forecolor="#999999" uuid="3ea8c862-e927-450a-8020-fb0027f20d03"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="400" width="405" height="29" forecolor="#525355" uuid="68859da1-3d4a-461c-98f1-bc57e7bf89c0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="18" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[MONTH]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="436" width="405" height="50" forecolor="#0B56A9" uuid="aae333e8-c64c-42f0-adba-100a172afa19"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="30" isBold="false" pdfFontName="fonts/Inter-Light.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1212" y="210" width="405" height="29" forecolor="#525355" uuid="7683a634-ceaa-40a3-b436-cc2d174e758c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="18" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[INQUIRY PERIOD]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1212" y="246" width="405" height="50" forecolor="#0B56A9" uuid="1f78d6b3-aa8c-4220-8b01-1aa7c22dc692"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="30" isBold="false" pdfFontName="fonts/Inter-Light.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{startPeriod} + " ~ " + $P{endPeriod}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="210" width="405" height="29" forecolor="#525355" uuid="218a7094-6596-447b-9271-18f301c6f39a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="18" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[CLIENT NAME]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="246" width="405" height="50" forecolor="#0B56A9" uuid="1ab114fb-ba10-41b6-b4d7-a51177378d76"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="30" isBold="false" pdfFontName="fonts/Inter-Light.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{clientName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="404" y="210" width="405" height="29" forecolor="#525355" uuid="af683375-3078-4eb3-abe7-e242f7fce9aa"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="18" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[GROUP ID]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="404" y="246" width="405" height="50" forecolor="#0B56A9" uuid="9ccae8a4-16cd-4559-b711-35291858e674"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="30" isBold="false" pdfFontName="fonts/Inter-Light.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{groupId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="808" y="210" width="405" height="29" forecolor="#525355" uuid="d65408f5-baad-4101-8e36-64bd2161e544"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="18" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[BUSINESS REGISTRATION NUMBER]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="808" y="246" width="405" height="50" forecolor="#0B56A9" uuid="d5e6a373-fb37-4b0c-b5d7-ef5afeb000da"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="30" isBold="false" pdfFontName="fonts/Inter-Light.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{brnId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="140" width="482" height="46" forecolor="#0B56A9" uuid="53d2640b-b77d-4221-b11b-351c21115522"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="35" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[REPORT DETAILS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-35" y="315" width="1700" height="1" forecolor="#999999" uuid="1b7da4b0-cb2b-4184-b94b-b59e246679a1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="330" width="482" height="46" forecolor="#0B56A9" uuid="f1507ec1-861d-467a-bc4d-0ae28417c55d"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="35" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[FEE DETAILS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="345" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="Table" x="0" y="0" width="1620" height="271" uuid="2ef357b4-f24c-4ad6-a973-723682590446">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset1" uuid="0e328884-3362-4fd2-b2d8-d5ebee1ba7ff">
+						<dataSourceExpression><![CDATA[$P{feeInfoList}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="820" uuid="6ef4d64b-2e6f-4a47-a393-2f77efa6b757">
+						<jr:columnHeader height="60" rowSpan="1">
+							<box>
+								<pen lineColor="#999999"/>
+								<topPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement style="TableHeader" x="0" y="0" width="820" height="60" forecolor="#525355" uuid="d09b4ac5-1d35-4151-a7da-0832e291050f">
+									<property name="net.sf.jasperreports.export.pdf.tag.tr" value="start"/>
+								</reportElement>
+								<box topPadding="0" leftPadding="0">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Left">
+									<font size="18" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+								</textElement>
+								<text><![CDATA[FEE TYPE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="60" rowSpan="1">
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textField isBlankWhenNull="true">
+								<reportElement style="TableCell" x="0" y="0" width="820" height="60" forecolor="#0B56A9" uuid="c2a24c61-3427-4681-9108-92166601039a"/>
+								<box leftPadding="0">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Left">
+									<font size="25" isBold="false" pdfFontName="fonts/Inter-Light.ttf" pdfEncoding="Identity-H"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{feeType}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="300" uuid="ec833624-9eb9-456b-9c3e-fbc74f18fb31">
+						<jr:columnHeader height="60" rowSpan="1">
+							<box>
+								<pen lineColor="#999999"/>
+								<topPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement style="TableHeader" x="0" y="0" width="300" height="60" forecolor="#525355" uuid="aeb2842a-d82b-49f1-a141-169fd902325b"/>
+								<box leftPadding="0">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Left">
+									<font size="18" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+								</textElement>
+								<text><![CDATA[CCY]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="60" rowSpan="1">
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textField isBlankWhenNull="true">
+								<reportElement style="TableCell" x="0" y="0" width="300" height="60" forecolor="#0B56A9" uuid="c2a24c61-3427-4681-9108-92166601039a"/>
+								<box leftPadding="0" rightPadding="0">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Left">
+									<font size="25" isBold="false" pdfFontName="fonts/Inter-Light.ttf" pdfEncoding="Identity-H"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ccy}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="200" uuid="62d80809-b467-4f53-a66c-99a7148fc11b">
+						<jr:columnHeader height="60" rowSpan="1">
+							<box>
+								<pen lineColor="#999999"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="TableHeader" x="0" y="0" width="200" height="60" forecolor="#525355" uuid="a0f9071a-6f9c-4e34-9695-d94cced410ea"/>
+								<box leftPadding="0">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Right">
+									<font size="18" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+								</textElement>
+								<text><![CDATA[VOLUME]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="60" rowSpan="1">
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textField isBlankWhenNull="true">
+								<reportElement style="TableCell" x="0" y="0" width="200" height="60" forecolor="#0B56A9" uuid="c2a24c61-3427-4681-9108-92166601039a"/>
+								<box rightPadding="0">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Right">
+									<font size="25" isBold="false" pdfFontName="fonts/Inter-Light.ttf" pdfEncoding="Identity-H"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{volume}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="300" uuid="9da47711-7fd5-4f52-bb15-6e9c69ab6370">
+						<jr:columnHeader height="60" rowSpan="1">
+							<box>
+								<pen lineColor="#999999"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="TableHeader" x="0" y="0" width="300" height="60" forecolor="#525355" uuid="554bad14-0a29-4a36-88b9-0af494cf1385"/>
+								<box leftPadding="0">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Right">
+									<font size="18" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+								</textElement>
+								<text><![CDATA[AMOUNT]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="60" rowSpan="1">
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textField pattern="###0.000" isBlankWhenNull="true">
+								<reportElement style="TableCell" x="0" y="0" width="300" height="60" forecolor="#0B56A9" uuid="c2a24c61-3427-4681-9108-92166601039a"/>
+								<box rightPadding="0">
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0"/>
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="0.0"/>
+									<rightPen lineWidth="0.0"/>
+								</box>
+								<textElement textAlignment="Right">
+									<font size="25" isBold="false" pdfFontName="fonts/Inter-Light.ttf" pdfEncoding="Identity-H"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="1020" y="271" width="300" height="60" forecolor="#0B56A9" backcolor="#DBD9D9" uuid="9f754e0d-fed7-494b-a21e-24779bdee3ce"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="20" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalVolume}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="271" width="1020" height="60" forecolor="#0B56A9" backcolor="#DBD9D9" uuid="bd60e4c4-7b7f-402c-b9af-6cccb49126bf"/>
+				<box leftPadding="0" rightPadding="10">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="20" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="1320" y="271" width="300" height="60" forecolor="#0B56A9" backcolor="#DBD9D9" uuid="12a91357-0ee9-4e6a-a989-9c591f2b770c"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="20" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="1495" y="25" width="250" height="30" forecolor="#0B56A9" uuid="92296f70-6e88-45ed-8031-45063ee463a4"/>
+				<textElement>
+					<font size="20" isBold="false" pdfFontName="fonts/Inter-Bold.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PAGE "+ $P{footerCurentPageCount} + " OF " + $P{footerTotalPageCount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-35" y="6" width="1700" height="1" forecolor="#999999" uuid="7eaeea41-63cc-4776-8442-a81f035bb822"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>
