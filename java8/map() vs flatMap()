@@ -1,0 +1,36 @@
+Java 8 stream API provides map() & flatMap().
+
+Data transformation
+--------------------
+Assume we have stream of 4 character array of lowercase.
+To change lowercase to uppercase in stream.
+
+Stream<String> stream01 = Stream.of("a","b","c","d");
+stream01.map(str -> str.toUpperCase()).forEach(System.out::println); // A B C D
+		
+List<Integer> list = Arrays.asList(3, 6, 9, 12, 15);
+list.stream().map(number -> number * 3).forEach(System.out::println); // 9 18 27 36 45
+
+
+Data flattering
+----------------
+Assume stream of 4 streams, each having 2 integer.
+To get stream of 8 integer. 
+
+
+map()
+------
+Input is stream of values and output as stream.
+Only data mapping/ data transformation.
+Output is single value for each input
+One to one mapping.
+Data transformation : From stream to stream
+
+flatMap()
+----------
+flatMap() = map() + flattering.
+Input is stream of stream of values and output is stream..
+Data Mapping/ Data Transformation with flattering
+Output is multiple value for each input
+One to many mapping.
+Data transformation : From stream of stream to stream
