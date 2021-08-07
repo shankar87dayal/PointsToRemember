@@ -1,5 +1,9 @@
 SES
 =====
+You can send 2,000 messages per day for free if you use Amazon SES from Amazon EC2 (or via AWS Elastic Beanstalk).
+After 2,000 messages, you will be charged the current Amazon SES rate of $0.10 per thousand messages.
+Attachment charges still apply, which are currently $0.12 per GB.
+
 https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-using-sdk-java.html
 https://www.rajith.me/2020/02/send-emails-using-aws-simple-email.html
 https://www.tothenew.com/blog/aws-ses-integration-for-java-applications/
