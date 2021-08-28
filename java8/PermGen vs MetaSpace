@@ -19,6 +19,9 @@ To avoid "java.lang.OutOfMemoryError: Metaspace" set maximum MetaSpace by -XX:Ma
 ***If we want to restart the server as soon as out of memory occur, we can set the parameter
 -XX:OnOutOfMemoryError="shutdown -r"
 
+***jVM generates a heap dump when a java.lang.OutOfMemoryError is thrown
+-XX:+HeapDumpOnOutOfMemoryError
+
 ***If we want to assign minimum 2 GB and maximum 5 GB to JVM, we need to write:
 -Xms2G -Xmx5G // -Xms means minimal heap size and -Xmx means maximal heap size
 
