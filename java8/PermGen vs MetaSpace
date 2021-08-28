@@ -22,6 +22,10 @@ To avoid "java.lang.OutOfMemoryError: Metaspace" set maximum MetaSpace by -XX:Ma
 ***jVM generates a heap dump when a java.lang.OutOfMemoryError is thrown
 -XX:+HeapDumpOnOutOfMemoryError
 By default, it stores the dump in a java_pid<pid>.hprof file in the directory where we're running the application.
+To read heap dump created, use below 
+https://heaphero.io/
+https://www.eclipse.org/mat/downloads.php
+
 
 ***If we want to assign minimum 2 GB and maximum 5 GB to JVM, we need to write:
 -Xms2G -Xmx5G // -Xms means minimal heap size and -Xmx means maximal heap size
