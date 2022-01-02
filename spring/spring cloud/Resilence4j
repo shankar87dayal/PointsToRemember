@@ -1,1 +1,65 @@
 
+If any microservice get down due to some reason then entire microservice system (combination of many microservices) or other microservice(in which it is called/consumed) should not get down and throw exception to client.
+If any microservice is down then other microservice(in which it is called/consumed) must retry again and again and handle this exception gracefully if exception continue.
+
+Assume Product microservice as a consumer try to consume Coupon microservice.
+Assume Coupon microservice is down and thus product microservice (where it is consumed) is handled.
+
+************************************ Steps *************************************************************
+
+1) Add depency in pom.xml of Product microservice
+org.springframework.boot:spring-boot-starter-actuator
+org.springframework.boot:spring-boot-starter-aop
+io.github.resilience4j:resilience4j-spring-boot2
+
+2) In Product microservice at required method we have to retry and handle the fallback gracefully.
+
+@RequestMapping("productapi")
+public class ProductRestController{
+
+@Autowired
+CouponClient couponClient;
+
+@Autowired
+privateproductRepo repo;
+
+Logger logger = LoggerFactory.getLogger(ProductRestController.class);
+
+@RequestMapping(value = "/products", method = RequestMethod.POST)
+@Retry(name = "product-api", fallbackMethod = "getInvoiceFallback") // "product-api" is unique retry instance with fallbackMethod configured.
+public Product create(@RequestBody Product product){
+	logger.info("create() call starts here");
+	Coupon coupon = couponClient.getCoupon(product.getCouponCode()); // If Coupon microservice is down then only retry will happen.
+	product.setPrice(product.getPrice().subtract(coupon.getDiscount()));
+	return repo.save(product);
+}
+
+public Product getInvoiceFallback(Product product, Exception e) { // Same signature as create method with Exception as an additional parameter.
+         logger.info("---RESPONSE FROM FALLBACK METHOD---"); // In log file
+         return product; // In client(browser), get dummy "product" instead of exception. This "product" will not get inserted in db via privateproductRepo.
+      }
+
+
+}
+
+
+3)In application.properties of Product microservice, define max-attempts and duration of each attempt (along with exception type, mostly ignored)
+resilience4j.retry.instances.product-api.max-attempts = 2 // Default is 3
+resilience4j.retry.instances.product-api.wait-duration = 3s // Default is 500 milliSeconds
+resilience4j.retry.instances.product-api.retry-exceptions = org.springframework.web.client.ResourceAccessException // Retry happens only when exeption "org.springframework.web.client.ResourceAccessException" is thrown. 
+                                                                                                                   // If want retry for all exception then remove this property fully. -- By Default.
+
+
+************************************ Flow *************************************************************
+1) Hit below
+URL: http://localhost:9095/productapi/products
+Method: POST
+Body: Raw JSON
+
+2) 
+If coupon is up, then new product is creted & get inserted in db via privateproductRepo.
+						                    OR
+If coupon is down, then product create() will do retry 2 times each 3 seconds to get response from Coupon microservice. If get response then new product is creted & get inserted in db via privateproductRepo.
+If even after retrying 2 attempts, still Coupon microservic is down & not giving any response then will handle exception and send gracefull message by call getInvoiceFallback method (as fallbackMethod = "getInvoiceFallback" is configured for retry).
+  
+
