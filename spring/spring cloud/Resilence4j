@@ -1,4 +1,19 @@
 
+Resilience4j is a lightweight, easy-to-use fault tolerance library inspired by Netflix Hystrix, but designed for Java 8 and functional programming. 
+Resilience4j is lightweight, because the library only uses Vavr, which does not have any other external library dependencies. 
+Netflix Hystrix, in contrast, has a compile dependency to Archaius which has many more external library dependencies such as Guava and Apache Commons Configuration.
+
+https://javatechonline.com/how-to-implement-fault-tolerance-in-microservices-using-resilience4j/
+
+If we implement Fault Tolerance in Microservices using Resilience4j, then we can apply multiple aspects/patterns in a single service in below order specified by Resilience4J
+1) Bulkhead
+2) Time Limiter.
+3) Rate Limiter.
+4) Circuit Breaker
+5) Retry
+
+********************************************************************************************************
+
 If any microservice get down due to some reason then entire microservice system (combination of many microservices) or other microservice(in which it is called/consumed) should not get down and throw exception to client.
 If any microservice is down then other microservice(in which it is called/consumed) must retry again and again and handle this exception gracefully if exception continue.
 
