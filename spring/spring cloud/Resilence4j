@@ -12,7 +12,7 @@ If we implement Fault Tolerance in Microservices using Resilience4j, then we can
 4) Circuit Breaker
 5) Retry
 
-********************************************************************************************************
+************************************Fault Tolerance with retry only********************************************************************
 
 If any microservice get down due to some reason then entire microservice system (combination of many microservices) or other microservice(in which it is called/consumed) should not get down and throw exception to client.
 If any microservice is down then other microservice(in which it is called/consumed) must retry again and again and handle this exception gracefully if exception continue.
