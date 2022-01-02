@@ -1,1 +1,38 @@
+Distributed Tracing using Sleuth and Zipkin.
+To track request by adding trace id.
+To find the reason of failure and place where it failed.
 
+Sleuth will include trace id in each request(HTTP header). 
+If trace id is not available then create new one and add in HTTP header.
+If trace id is available then use the same in HTTP header of each & every microservices.
+
+
+Zipkin is centralized dashboard, where all trace of slueth will be exported and displayed in beautiful manner.
+From Zipkin dashboard, we can choose required microservice and find trace belong to it
+
+
+***********************Steps****************************************
+
+1) Add dependency of sleuth & zipkin in API gateway and other microservices in pom.xml.
+org.springframework.cloud : spring-cloud-starter-sleuth
+org.springframework.cloud : spring-cloud-sleuth-zipkin
+
+2) Install Zipkin server and run it.
+curl -sSL https://zipkin.io/quickstart.sh | bash -s
+java -jar zipkin.jar
+
+3) Open Zipkin in browser
+https://localhost:9411/zipkin/
+
+4) Define application name in each micro services in application.properties
+spring.application.name = gateway-service
+
+5) Hit some webservice call.
+Now sleuth will add trace id and all will get exported to zipkin server. 
+
+6) In zipkin server, 
+	a) Search with serviceName=gateway-service and select particular trace.
+	b) Click button "Run Query".
+	c) Display flow
+	d) Click on "Show" to find out exact flow of request of that trace.
+	e) From this flow, we can easily found out where does problem occured.
