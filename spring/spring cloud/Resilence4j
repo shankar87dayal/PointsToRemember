@@ -51,6 +51,8 @@ public Product create(@RequestBody Product product){
 
 public Product getInvoiceFallback(Product product, Exception e) { // Same signature as create method with Exception as an additional parameter.
          logger.info("---RESPONSE FROM FALLBACK METHOD---"); // In log file
+	 // logger.error(" Unable to find invoice" +e.getMessage());
+         // e.printStackTrace();
          return product; // In client(browser), get dummy "product" instead of exception. This "product" will not get inserted in db via privateproductRepo.
       }
 
