@@ -1,1 +1,31 @@
+******************************Run jar with VM arguments********************************************
+java 
+-Xms512m 
+-Xmx1024m 
+-Denv=scrumdev 
+-Dvm.name=RPT-CONT 
+-Djasypt.encryptor.password=NGPASSWORD 
+-Dspring.config.locaion=classpath:/config/scrumdev/csl-oltpbridge.yml
+-Dlog.base=c:\Users\Public\logs
+-Dthin.root=c:\Users\shankar\.m2 
+-jar batchService.jar
 
+******************************Get/Set VM arguments********************************************
+-D means you can use this value using System.getProperty
+String vmName = System.getProperty("vm.name");
+System.setProperty("vm.name",vmName);
+
+******************************Run jar with VM arguments with central configration********************************************
+-Dspring.config.locaion=/jboss/api/config/scrumdev/csl-oltpbridge.yml
+-Dlog.base=/jboss/api/log/services
+
+After any update in config file "csl-oltpbridge.yml", stop and then start server.
+
+Access resource in SIT1 via KONG API Gateway
+URL : https://100.24.351.470:10001/api/v2/inquiry/pnoteDaily
+Method: POST
+
+Here 
+https://100.24.351.470 is PROXY server to access KONG API Gateway.
+10001 is PORT number for SIT1.
+/api/v2/inquiry/pnoteDaily is resource to access.
