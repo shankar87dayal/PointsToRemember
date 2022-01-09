@@ -1,3 +1,5 @@
+ https://softwaremill.com/how-to-communicate-java-microservices/
+
 1) Synchronous - Sender wait for the response from receiver.
                  Both consumer & producer must should know each other so that they they can consume/produce.
                  HTTP/HTTPS based.
@@ -11,5 +13,5 @@
               2.B.a) Publisher/Subscriber with topic - Apache Kafka.
               2.B.b) Point to Point with queue - ActiveMQ, RabbitMQ.
        2.C) Streaming your data - Apache kafka streaming.
- 
+
             
