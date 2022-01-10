@@ -1,5 +1,6 @@
  https://softwaremill.com/how-to-communicate-java-microservices/
 
+***********************************Ways of communication among microservices***************************************************************
 1) Synchronous - Sender wait for the response from receiver.
                  Both consumer & producer must should know each other so that they they can consume/produce.
                  HTTP/HTTPS based.
@@ -14,7 +15,7 @@
               2.B.b) Point to Point with queue - ActiveMQ, RabbitMQ.
        2.C) Streaming your data - Apache kafka streaming.
 
-  **************************************************************************************************
+  ***********************************Fault Tolerance***************************************************************
 https://javatechonline.com/how-to-implement-fault-tolerance-in-microservices-using-resilience4j/
 If we implement Fault Tolerance in Microservices using Resilience4j, then we can apply multiple aspects/patterns in a single service in below order specified by Resilience4J
  1) Bulkhead
@@ -22,3 +23,32 @@ If we implement Fault Tolerance in Microservices using Resilience4j, then we can
  3) Rate Limiter.
  4) Circuit Breaker
  5) Retry
+
+  ***********************************Caching data***************************************************************
+If it's preferred to operate on the newest version of the record, you can treat the cache as a backup used only if the remote microservice is unavailable.
+You can put cache data in memory using spring boot with any of the popular solutions like ehcache or caffeine .
+Another approach is storing cached data in a separate component like Redis or Hazelcast.
+
+***********************************Caching HTTP***************************************************************
+You can also make your caching mechanism smarter with the usage of tools like ETags.
+ETag is an HTTP header used to identify a specific version of a resource, which is sent to the client along with a response. When data is cached, it should save the value of ETag.
+With this approach, data is re-fetched only if it did change.
+
+Another way to coordinate caching behaviour between the client and the server is the use of cache directives. By returning the proper header, the server can instruct the client exactly how long the cache should be kept and when it should be invalidated.
+
+***********************************Partial failures***************************************************************
+You can also handle errors of other microservices by temporarily turning off some features of the application that depend on the synchronous call to service that is down.
+Usually, partial unavailability of some components is much better than a full-blown crash of the whole system.
+
+***********************************Documenting your API***************************************************************
+Providing a comprehensive description of the microservice’s public API makes the job of other teams less complicated and the process of integration becomes more natural.
+A very popular way to document REST API is OpenAPI (formerly known as Swagger).
+Or mentained that in Confluence page and publish it to all teams.
+
+***********************************Versioning the API***************************************************************
+The recommended solution is to keep multiple variants of API (versions) simultaneously. After all the client services successfully migrate to a new version, the old one can be dropped.
+
+***********************************Securing your API***************************************************************
+Handle Security in Zuul API Gateway with OAuth2 and JWT.
+Enable SSO(Single Sign On) with SAML(Security Assertion Markup Language).
+Also, we can secure REST API with Spring Boot and Spring Security.
