@@ -4,7 +4,7 @@
                  Both consumer & producer must should know each other so that they they can consume/produce.
                  HTTP/HTTPS based.
        1.A) Eureka Server & Feign client.
-       1.B) Rest template.
+       1.B) Rest template of REST (REpresentational State Transfer).
  
 2) Asynchronous - Sender don't wait for the response from receiver.
                  Both consumer & producer may/maynot know each other so that they they can consume/produce.
@@ -14,4 +14,11 @@
               2.B.b) Point to Point with queue - ActiveMQ, RabbitMQ.
        2.C) Streaming your data - Apache kafka streaming.
 
-            
+  **************************************************************************************************
+https://javatechonline.com/how-to-implement-fault-tolerance-in-microservices-using-resilience4j/
+If we implement Fault Tolerance in Microservices using Resilience4j, then we can apply multiple aspects/patterns in a single service in below order specified by Resilience4J
+ 1) Bulkhead
+ 2) Time Limiter.
+ 3) Rate Limiter.
+ 4) Circuit Breaker
+ 5) Retry
