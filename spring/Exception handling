@@ -11,7 +11,7 @@ Exception handling/mapping
 @Entity
 @Table(name = "user")
 public class User{
-@Size(min = 2, max = 50)
+	@Size(min = 2, max = 50)
 	@NotEmpty(message = "Username is Mandatory field. Please provide username")
 	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
 	private String username; // If username = "" then throw MethodArgumentNotValid Exception
@@ -51,7 +51,7 @@ UserController.java
 @Validated
 @RequestMapping(value = "/users")
 public class UserController {
-  @ApiOperation(value = "Creates a new user")
+ 	@ApiOperation(value = "Creates a new user")
 	@PostMapping
 	public ResponseEntity<Void> createUser(@ApiParam("User information for a new user to be created.") @Valid @RequestBody User user, UriComponentsBuilder builder) {
 		try {
