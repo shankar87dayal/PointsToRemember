@@ -1,0 +1,14 @@
+"Exception tracking" Design Pattern
+========================================
+You have applied the Microservice architecture pattern. 
+The application consists of multiple services and service instances that are running on multiple machines. 
+Errors sometimes occur when handling requests. 
+When an error occurs, a service instance throws an exception, which contains an error message and a stack trace.
+
+List of http status
+https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+
+
+1) Exception in microservice is similar like spring exception handling.
+      https://github.com/shankar87dayal/PointsToRemember/blob/main/spring/Exception%20handling
+2) In AWS, if any exception occur then respective "AWS cloud Alarm" triggered and mail triggered as per confiured.
