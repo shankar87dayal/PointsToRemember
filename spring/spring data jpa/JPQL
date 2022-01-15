@@ -1,6 +1,6 @@
 Repository --> CrudRepository --> PagingAndSortingRepository --> JpaRepository--> SimpleJpaRepository --> QuerydslJpaRepository
 
-
+https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa
 
 JPQL is Java Persistence Query Language defined in JPA specification
 It's a good approach to place a query definition just above the method inside the repository (as @Query) rather than inside our domain model as named queries (@NamedQuery). 
