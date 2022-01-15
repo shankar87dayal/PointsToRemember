@@ -1,0 +1,9 @@
+https://www.bezkoder.com/spring-boot-pagination-filter-jpa-pageable/
+
+Repository that supports Pagination and Filter is PagingAndSortingRepository.
+We will use JpaRepository which extends PagingAndSortingRepository interface.
+
+public interface TutorialRepository extends JpaRepository<Tutorial, Long> {
+  Page<Tutorial> findByPublished(boolean published, Pageable pageable);
+  Page<Tutorial> findByTitleContaining(String title, Pageable pageable);
+}
