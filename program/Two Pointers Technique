@@ -12,6 +12,7 @@ in order to get closer to the sum.
 We keep moving the pointers until we get the sum as X. 
 
 https://www.geeksforgeeks.org/two-pointers-technique/
+https://www.youtube.com/watch?v=2wVjt3yhGwg
 ======================================================Coding================================================================
 package com.pract.demo;
 import java.io.*;
