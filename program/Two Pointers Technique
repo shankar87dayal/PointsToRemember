@@ -19,56 +19,50 @@ https://www.geeksforgeeks.org/two-pointers-technique/
 https://www.youtube.com/watch?v=2wVjt3yhGwg
 ======================================================Coding================================================================
 package com.pract.demo;
+
 import java.util.Arrays;
 
 public class TwoPointerAlgorithm {
-	public static void isPairSum(int A[], int N, int X) // Two pointer algorithm
+	public static void isPairSum(int A[], int X) // Two pointer algorithm
 	{
 		int i = 0;
 		int j = A.length - 1;
-		Arrays.sort(A);
+		Arrays.sort(A); //To sort array first
 		while (i < j) {
 			if (A[i] + A[j] == X) {
-				System.out.println(A[i]+"=>"+A[j]);
+				System.out.println(A[i] + "=>" + A[j]);
 				break;
-			}
-			else if (A[i] + A[j] < X)
+			} else if (A[i] + A[j] < X)
 				i++;
 			else
 				j--;
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		int arr[] = { 2, 3, 5, 7, 8, 9, 10, 11, 12};
+	public static void main(String[] args) {
+		int arr[] = { 2, 3, 5, 7, 8, 9, 10, 11, 12 };
 		int val = 17;
-		int arrSize = arr.length;
-	
-		sumIsX(arr, val); 
-		/*
-		5, 12
-		7, 10
-		8, 9
-		*/
-		
-		isPairSum(arr, arrSize, val); // 5=>12
+
+		sumIsX(arr, val);
+		System.out.println("===========================");
+		isPairSum(arr, val);
 	}
-	
-	public static void sumIsX(int A[], int X) {
-		for(int i=0; i<A.length; i++){
-	         for (int j=i; j<A.length; j++){
-	            if((A[i]+A[j])== X && i!=j){
-	               System.out.println(A[i]+", "+A[j]);
-	            }
-	         }
-	      }
+
+	public static void sumIsX(int A[], int X) { // No sorting required.
+		for (int i = 0; i < A.length; i++) {
+			for (int j = i; j < A.length; j++) {
+				if ((A[i] + A[j]) == X && i != j) {
+					System.out.println(A[i] + ", " + A[j]);
+				}
+			}
+		}
 	}
 }
+
 
 ============================Output=============================================
 5, 12
 7, 10
 8, 9
-
+===========================
 5=>12
