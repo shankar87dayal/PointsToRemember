@@ -6,6 +6,10 @@
                  HTTP/HTTPS based.
        1.A) Eureka Server & Feign client.
        1.B) Rest template of REST (REpresentational State Transfer).
+            Spring WebClient is an asynchronous, reactive client to perform HTTP requests, a part of Spring WebFlux framework.
+            
+            There are two approaches to internal architecture, CQRS vs Plain REST calls. The eventing/messaging is an example of CQRS,
+            where you can separate read/write side operations and all write side operations can be implements through eventing for better scalability and throughput.
  
 2) Asynchronous - Sender don't wait for the response from receiver.
                  Both consumer & producer may/maynot know each other so that they they can consume/produce.
@@ -14,7 +18,10 @@
               2.B.a) Publisher/Subscriber with topic - Apache Kafka.
               2.B.b) Point to Point with queue - ActiveMQ, RabbitMQ.
        2.C) Streaming your data - Apache kafka streaming.
-
+3) API Gateway
+   3.A) All communication via API gateway -  It makes service discovery easy, all communications can be tracked at one point.
+   3.B) External services via gateway - API Gateway with Load Balancer. API Gateway can manage and balance out network traffic just as a Load Balancer, just in a different way. Instead of distributing requests evenly to a set of backend resources (e.g. a cluster of servers), an API Gateway can be configured to direct requests to specific resources based on the endpoints being requested.
+   3.C) 
   ***********************************Fault Tolerance***************************************************************
 https://javatechonline.com/how-to-implement-fault-tolerance-in-microservices-using-resilience4j/
 If we implement Fault Tolerance in Microservices using Resilience4j, then we can apply multiple aspects/patterns in a single service in below order specified by Resilience4J
