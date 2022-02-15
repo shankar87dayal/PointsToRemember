@@ -1,6 +1,12 @@
 https://medium.com/backend-habit/generate-codecoverage-report-with-jacoco-and-sonarqube-ed15c4045885
 https://tomgregory.com/how-to-measure-code-coverage-using-sonarqube-and-jacoco/
 
+*** 
+1) To find port number say 8090
+   netstat -aon | findstr 8090
+2) Above will give process ID say 77777
+   taskkill /f /pid 77777
+
 
 Steps to Analyse Maven Project Code Coverage in SonarQube :
 
@@ -38,4 +44,9 @@ Add <nonProxyHosts>localhost</nonProxyHosts> under <proxy> (which is under <prox
 
 
 To run project in sonar
-mvn clean install sonar:sonar -Dsonar.host.url=http://localhost:9090 -Dsonar.login=99b1b278f9a39320a00eebc6403ca1a8035227af --log-file C:\Users\Public\logs\mvn.log
+mvn clean install sonar:sonar 
+-Dsonar.host.url=http://localhost:9090 
+-Dsonar.login=99b1b278f9a39320a00eebc6403ca1a8035227af 
+--log-file C:\Users\Public\logs\mvn.log 
+-Dsonar.exclusions=src/test/resources/*,src/main/resources/*
+-Dsonar.coverage.exclusions=**/*Application*,**/*Configuration*,**/exception/*,src/test/resources/*,src/test/**/*
