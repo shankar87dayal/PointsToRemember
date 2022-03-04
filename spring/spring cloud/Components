@@ -25,14 +25,6 @@ If some depended microservice is down/not responding, retry it number of times a
    To find the reason of failure and place where it failed
 
 7) Centralized configuration
-    a)Create config server -> spring-cloud-config-server
-    b)Create config repository -> properties file in GitHub
-    		//spring.cloud.config.server.git.uri=file:///d:/config-properties   // For local file
-    		spring.cloud.config.server.git.uri=https://github.com/abcd/springboot.git
-		spring.cloud.config.server.git.uri.username=test
-		spring.cloud.config.server.git.uri.password=test
-	
-	To access "config-client.properties", use http://localhost:8888/config-client/default
-	To access "config-client-development.properties", use http://localhost:8888/config-client/development
-	
-    c)Create config client -> spring-cloud-config-client
+    a)Create config server
+    b)Create config repository
+    c)Create config client
