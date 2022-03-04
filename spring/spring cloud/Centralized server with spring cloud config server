@@ -1,0 +1,66 @@
+Centralized server with spring cloud config server
+
+https://www.javainuse.com/spring/spring_cloud_config_server_using_git
+
+ a)Create config server -> 
+		a.1) Add dependencies spring-cloud-config-server, spring-cloud-starter-bootstrap in pom.xml
+		a.2) @EnableConfigServer in main class.
+		a.3) In application.proprties
+			server.port = 8888
+			spring.application.name = config-server 
+			//To access config repository
+			//spring.cloud.config.server.git.uri=file:///d:/application.properties   // For local file
+			spring.cloud.config.server.git.uri=https://github.com/JavaInUse/employee-config-server // To access default properties file https://github.com/JavaInUse/employee-config-server/application.properties
+			spring.cloud.config.server.git.uri.username=test
+			spring.cloud.config.server.git.uri.password=test
+		
+		
+	  Run config server and access properties file for respective profile/environment.
+	
+	  http://localhost:8888/product-service/default/  -- For accessing default profile product-service.properties
+	  http://localhost:8888/product-service/dev/  -- For accessing dev profile product-service-dev.properties 
+	  http://localhost:8888/product-service/qa/  -- For accessing qa profile product-service-qa.properties 
+		
+		
+ b)Create config repository -> 
+	  https://github.com/JavaInUse/employee-config-server
+	
+	
+	  https://github.com/JavaInUse/employee-config-server/product-service.properties (default for spring.application.name = product-service and no profile  defined)
+	  https://github.com/JavaInUse/employee-config-server/product-service-dev.properties (for spring.application.name = product-service and dev profile  defined)
+	  https://github.com/JavaInUse/employee-config-server/product-service-qa.properties (for spring.application.name = product-service and qa profile  defined)
+	
+	  Inside above GitHub, define product-service.properties, product-service-dev.properties, product-service-qa.properties for application product-service. 
+	  Each have respective key-value as per profile.
+	
+	  management.security.enabled=true // By default true to enable security
+	  datasource detail
+	  spring cloud detail
+	  server port
+	
+	
+	************Important***************
+	  Properties defined in default product-service.properties will be common and thus available for all other profiles/environments.
+	
+	  application.yml/application.properties file is specific to Spring Boot applications. 
+	  Unless you change the location of external properties of an application, spring boot will always load application.yml from the following location:
+	  /src/main/resources/application.yml
+	
+	  bootstrap.yml/bootstrap.properties on the other hand is specific to spring-cloud-config and is loaded before the application.yml
+	  bootstrap.yml/bootstrap.properties is only needed if you are using Spring Cloud and your microservice configuration is stored on a remote Spring Cloud Config Server.
+	 
+
+	
+ c)Create config client -> 
+		c.1) Add dependencies spring-cloud-starter-config, spring-cloud-config-client, spring-cloud-starter-bootstrap in pom.xml
+		c.2) In /src/main/resources/bootstrap.properties because we are using spring cloud config server
+				spring.application.name = product-service
+				server.port=8080
+				spring.profiles.active=dev
+				spring.cloud.config.uri=http://localhost:8888  -- To access config server
+
+
+Running		
+	Run in below order - Eureka Server, Config Server, Product Microservice (config client with dev environment)
+	Then as per apring.profiles.activate, Product Microservice will get started.
+	If any change made in config server then better to restart Product Microservice
