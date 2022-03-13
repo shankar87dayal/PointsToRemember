@@ -5,7 +5,7 @@ Open source Components/Projects in Spring cloud which are not available in sprin
 2) Load Balancing - Spring Cloud Load Balancer (Best), Ribbon as client side load balancer.
 		Spring Cloud Load Balancer is used with Feign client.
 		
-3) Fault Tolerance (Bulkhead, Time Limiter , Rate Limiter, Circuit Breaker, Retry)  - Resilence4j (Best), Hystrix (deprecated) -
+3) Fault Tolerance (Bulkhead, Time Limiter , Rate Limiter, Circuit Breaker, Retry)  - Resilence4j (Best), Hystrix (deprecated).
 If some depended microservice is down/not responding, retry it number of times and if connected even after that then to handle the error gracefully.
 
 4) Easy Integration - Feign client
