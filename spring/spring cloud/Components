@@ -1,6 +1,6 @@
 Open source Components/Projects in Spring cloud which are not available in spring boot:- Non functional requirement of microservice
 
-1) Service Registration & Discovery - Netflix Eureka server - To registered all microservice.
+1) Service Registration & Discovery - Netflix Eureka server - To registered all microservice. Along with API Gateway, Eureka is used to enable security .
 
 2) Load Balancing - Spring Cloud Load Balancer (Best), Ribbon as client side load balancer.
 		Spring Cloud Load Balancer is used with Feign client.
