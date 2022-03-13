@@ -2,6 +2,10 @@ Service Registration & Discovery - Netflix Eureka server - To registered all mic
 
 Eureka solve hard coding of urls of application to consume.
 
+Securing Microservices with Eureka server.
+With Eureka, we route request based on service name not with host and port.
+
+
 
 1) Eureka server project - Separate project
 ===================================================
