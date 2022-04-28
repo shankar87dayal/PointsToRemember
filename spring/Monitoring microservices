@@ -1,0 +1,17 @@
+Monitoring microservices
+1) Sleuth and Zipkin.
+   Distributed Tracing - To track request by adding trace id. To find the reason of failure and place where it failed
+2) Actuator 
+   It help us to monitor and manage the Spring Boot application. 
+   It contains the actuator endpoints (the place where the resources live).
+3) Resilence4j 
+   Fault Tolerance (Bulkhead, Time Limiter , Rate Limiter, Circuit Breaker, Retry).
+4) AWS CloudWatch & CloudTrail
+   AWS CloudWatch monitors your AWS resources and applications, whereas CloudTrail monitors the activity in your AWS environment. 
+   For instance, with CloudWatch, you can scale your applications, whereas, with CloudTrail, you can see who did what to your applications
+
+https://www.decipherzone.com/blog-detail/top-best-tools-monitoring-microservices
+https://www.youtube.com/watch?v=G4_ay2_h9GI
+https://www.youtube.com/watch?v=sATuxP_qC-4
+
+
