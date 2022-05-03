@@ -1,0 +1,62 @@
+https://mkyong.com/spring-boot/spring-boot-slf4j-logging-example/
+https://www.youtube.com/watch?v=8AN58dHzkz4
+https://github.com/sumitMultani/spring-boot-logging-example
+
+Spring Boot makes use of Apache Commons' Logging for its system logs by default. 
+Additionally, by default you can use any of the logging frameworks under the SLF4J API such as 
+Logback (which is the default), Log4J2, and Java Util Logging in Spring Boot.
+
+1) add spring-boot-starter-web, it will pull in the logback dependencies for Sl4j.
+2) Configure the logging in application.properties
+# 2.1)logging level
+# All(Lowest), Trace, Debug, Info(Default), Warn, Error, Fatal, Off(Highest).
+logging.level.org.springframework=ERROR // Error, Fatal
+logging.level.com.mkyong=DEBUG // Debug, Info, Warn, Error, Fatal
+
+# 2.2) Appender - output to a file
+logging.file=app.log
+
+# 2.3) Format of log
+logging.pattern.file=%d %p %c{1.} [%t] %m%n
+logging.pattern.console=%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+
+#If no active profile, default is 'default'
+spring.profiles.active=prod
+
+The above logging configuration is sufficient for development. For production, we need more logging features like file rolling/archived or SMTP. 
+In Spring Boot, we still allow to configure logback via the standard logback.xml.
+
+3) We would need to exclude the dependency on spring-boot-starter-logging and add a dependency on spring-boot-starter-log4j2.
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter</artifactId>
+  <exclusions>
+    <exclusion>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
+    </exclusion>
+  </exclusions>
+</dependency>
+
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+  <exclusions>
+    <exclusion>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
+    </exclusion>
+  </exclusions>
+</dependency>
+
+<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-log4j2</artifactId>
+</dependency>
+
+4) Use @Slf4j and log
+@Slf4j
+@Service
+public class DemoService {
+    log.error("Error message"); // logger.error("Error message");
+}
